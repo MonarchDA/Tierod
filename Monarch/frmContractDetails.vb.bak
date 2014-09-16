@@ -1,0 +1,587 @@
+Imports MonarchFunctionalLayer
+Imports System.Drawing
+Imports System.Drawing.Graphics
+Public Class frmContractDetails
+
+    Private _browseFileName As String
+    Private oReadValuesFromExcel As New ReadValuesFromExcel
+    Private oExcel As ExcelUtil
+    Private _btnVisible As Boolean
+
+    Dim excelRowNoTable1 As Integer = 3
+    Dim excelRowNoTable2 As Integer = 16
+    Dim isFirstRowGenerated As Boolean = False
+   
+    Private Property ReadValuesFromExcel() As ReadValuesFromExcel
+        Get
+            Return oReadValuesFromExcel
+        End Get
+        Set(ByVal value As ReadValuesFromExcel)
+            oReadValuesFromExcel = value
+        End Set
+    End Property
+
+    Public Property BrowseFileName() As String
+        Get
+            Return _browseFileName
+        End Get
+        Set(ByVal value As String)
+            _browseFileName = value
+        End Set
+    End Property
+
+    Public Property BtnVisible() As Boolean
+        Get
+            Return _btnVisible
+        End Get
+        Set(ByVal value As Boolean)
+            _btnVisible = value
+        End Set
+    End Property
+
+    Public Property ExcelFile() As ExcelUtil
+        Get
+            Return oExcel
+        End Get
+        Set(ByVal value As ExcelUtil)
+            oExcel = value
+        End Set
+
+    End Property
+
+    Private Sub txtlPartCode_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtlPartCode.TextChanged
+        PartCode1 = txtlPartCode.Text
+    End Sub
+
+    Private Sub cmbAssemblyType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAssemblyType.SelectedIndexChanged
+        If cmbAssemblyType.SelectedItem <> "" Then
+            AssemblyType = cmbAssemblyType.SelectedItem
+        End If
+    End Sub
+
+    Private Sub chkManageCustomers_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkManageCustomers.CheckedChanged
+        '22_02_2010    RAGAVA
+        Try
+            If chkManageCustomers.Checked = True Then
+                GroupBox1.Visible = True
+                LabelGradient1.Visible = True
+                pnlManageCustomerDetails.Visible = True
+                txtCustomerName_Add.Enabled = True
+                cmbCustomerName_Delete.Enabled = True
+            Else
+                GroupBox1.Visible = False
+                LabelGradient1.Visible = False
+                pnlManageCustomerDetails.Visible = False
+                txtCustomerName_Add.Enabled = False
+                cmbCustomerName_Delete.Enabled = False
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub txtCustomerName_Add_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCustomerName_Add.TextChanged
+        '22_02_2010   RAGAVA
+        Try
+            Dim strCustomerName As String
+            strCustomerName = Trim(txtCustomerName_Add.Text)
+            If strCustomerName <> "" Then
+                'If sender.Name = "txtCustomerName" Then
+                '    ListBox1.Visible = True
+                '    ListBox1.Location = New Point(ListBox1.Location.X, ListBox1.Location.Y + 25)
+                'End If
+                Dim strQuery As String = "Select * from CustomerManageDetails where CustomerName like '" & strCustomerName & "%' order by CustomerName Asc"
+                Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+                ListBox1.BringToFront()
+                ListBox1.Items.Clear()
+                If objDT.Rows.Count > 0 Then
+                    ListBox1.Visible = True
+                    For Each dr As DataRow In objDT.Rows
+                        ListBox1.Items.Add(dr(0).ToString)
+                    Next
+                Else
+                    ListBox1.Visible = False
+                End If
+            Else
+                ListBox1.Visible = False
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    '22_02_2010   RAGAVA
+    Private Function GetPoint(ByVal textBoxControl As TextBox) As Point
+        Try
+            Dim coord As Point
+            Dim size As SizeF
+            Dim graphics As Graphics
+            'graphics = graphics.FromHwnd(textBoxControl.Handle)
+            graphics = Drawing.Graphics.FromHwnd(textBoxControl.Handle)
+            size = graphics.MeasureString(textBoxControl.Text.Substring(0, textBoxControl.SelectionStart), textBoxControl.Font)
+            coord = New Point(Convert.ToInt16(size.Width) + textBoxControl.Location.X, Convert.ToInt16(size.Height) + textBoxControl.Location.Y)
+            Return coord
+        Catch ex As Exception
+        End Try
+    End Function
+
+    '22_02_2010   RAGAVA
+    Private Sub txtCustomerName_Add_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCustomerName_Add.KeyUp
+        Try
+            If e.KeyCode = Keys.Down Or e.KeyCode = Keys.Up Then
+                ListBox1.Focus()
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    '22_02_2010   RAGAVA
+    Private Sub ListBox1_Leave(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListBox1.Leave
+        Try
+            txtCustomerName_Add.Text = ListBox1.SelectedItem.ToString()
+            txtCustomerName_Add.SelectionStart = txtCustomerName_Add.Text.Length
+            ListBox1.SendToBack()
+            txtCustomerName_Add.Focus()
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub ListBox1_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListBox1.LostFocus
+        ListBox1.Visible = False
+    End Sub
+
+    '22_02_2010   RAGAVA
+    Private Sub cmbCustomerName_Delete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbCustomerName_Delete.Click
+        Try
+            Dim strQuery As String = "Select * from CustomerManageDetails order by CustomerName Asc"
+            Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+            'cmbCustomerName_Delete.DataSource = objDT
+            cmbCustomerName_Delete.Items.Clear()
+            cmbCustomerName_Delete.Items.Add(" ")
+            For Each dr As DataRow In objDT.Rows
+                cmbCustomerName_Delete.Items.Add(dr(0).ToString)
+                'cmbCustomerName_Delete.DisplayMember = "CustomerName"
+            Next
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    '22_02_2010   RAGAVA
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        Try
+            If Trim(txtCustomerName_Add.Text) <> "" Then
+                Dim strQuery As String = "Select * from CustomerManageDetails Where CustomerName = '" & Trim(txtCustomerName_Add.Text) & "'"
+                Dim objDT1 As DataTable = oDataClass.GetDataTable(strQuery)
+                If objDT1.Rows.Count = 0 Then
+                    strQuery = "Insert into CustomerManageDetails Values ('" & UCase(Trim(txtCustomerName_Add.Text)) & "')"
+                    Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+                End If
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    '22_02_2010   RAGAVA
+    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+        Try
+            If Trim(cmbCustomerName_Delete.SelectedItem) <> "" Then
+                Dim strQuery As String = "Delete from CustomerManageDetails Where CustomerName ='" & Trim(cmbCustomerName_Delete.SelectedItem) & "'"
+                Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+                cmbCustomerName_Delete_Click(sender, e)
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    '22_02_2010   RAGAVA
+    Private Sub ListBox1_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListBox1.MouseDoubleClick
+        Try
+            txtCustomerName_Add.Text = Trim(ListBox1.SelectedItem)
+            txtCustomerName_Add.Focus()
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    '22_02_2010   RAGAVA
+    Private Sub cmbCustomerName_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbCustomerName.Click
+        AddCustomerNames()
+    End Sub
+
+    Private Sub AddCustomerNames()
+        Try
+            Dim strQuery As String = "Select * from CustomerManageDetails order by CustomerName Asc"
+            Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+            cmbCustomerName.Items.Clear()
+            cmbCustomerName.Items.Add(" ")
+            For Each dr As DataRow In objDT.Rows
+                cmbCustomerName.Items.Add(dr(0).ToString)
+            Next
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub cmbCustomerName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCustomerName.SelectedIndexChanged
+        If Not cmbCustomerName.Text = "" Then
+            CustomerName = cmbCustomerName.Text
+        End If
+    End Sub
+
+    Private Sub frmContractDetails_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Try
+            cmbAssemblyType.SelectedIndex = 0 'ANUP 16-12-2010 
+            ColorTheForm()
+            AddCustomerNames()
+            ShowingChangePartNumberButton()
+            'Me.txtlPartCode.Text = PartCode1      '16_08_2011   RAGAVA
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub ColorTheForm()
+        FunctionalClassObject.LabelGradient_GreenBorder_ColoringTheScreens(LabelGradient3, LabelGradient5, LabelGradient4, LabelGradient2)
+        FunctionalClassObject.LabelGradient_OrangeBorder_ColoringTheScreens(lblGradientContractDetails)
+        FunctionalClassObject.LabelGradient_OrangeBorder_ColoringTheScreens(lblBackBrowse)
+        FunctionalClassObject.LabelGradient_OrangeBorder_ColoringTheScreens(LabelGradient1)
+        FunctionalClassObject.subLabelGradient_Child_ColoringScreens(lblGradientPrimaryInformation)
+        FunctionalClassObject.subLabelGradient_Child_ColoringScreens(lblLogInformation)
+        FunctionalClassObject.subLabelGradient_Child_ColoringScreens(LabelGradient6)
+    End Sub
+
+
+    'anup 24-01-2011 start
+    Private Sub ShowingChangePartNumberButton()
+        Try
+            If IsNew_Revision_Released = "Revision" OrElse IsNew_Revision_Released = "Released" Then
+                btnChangePartNumber.Visible = True
+            ElseIf IsNew_Revision_Released = "New" Then
+                btnChangePartNumber.Visible = False
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnChangePartNumber_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangePartNumber.Click
+        Try
+            If IsPartNumberUpdatedToDB() = False Then
+                MessageBox.Show("Part Number is not updated", "Error in Updating", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Function IsPartNumberUpdatedToDB() As Boolean
+        IsPartNumberUpdatedToDB = False
+        Try
+            Dim strContractNumber As String = String.Empty
+            Dim strQuery As String = String.Empty
+            For Each listviewItem As ListViewItem In ofrmMonarch.lvwContractDetails.SelectedItems
+                strContractNumber = listviewItem.SubItems(0).Text
+            Next
+            If Not IsNothing(strContractNumber) Then
+                If DoesContractExists(cmbCustomerName.Text, strContractNumber) Is Nothing Then
+                    strQuery = "insert into dbo.ContractDetails_Revision values('" & strContractNumber & "','" & cmbCustomerName.Text & "','" & txtlPartCode.Text & "')"
+                Else
+                    strQuery = "update dbo.ContractDetails_Revision set CustomerPartNUmber ='" & txtlPartCode.Text & "' where CustomerName ='" & cmbCustomerName.Text & "' and ContractNumber ='" & strContractNumber & "'"
+                End If
+                Dim strQuery2 As String = "update dbo.ContractMaster set CustomerPartCode ='" & txtlPartCode.Text & "' where ContractNumber ='" & strContractNumber & "'"
+                Dim Query2Updation As Boolean = IFLConnectionObject.ExecuteQuery(strQuery2)
+                IsPartNumberUpdatedToDB = IFLConnectionObject.ExecuteQuery(strQuery)
+                If Query2Updation AndAlso IsPartNumberUpdatedToDB Then
+                    IsPartNumberUpdatedToDB = True
+                Else
+                    IsPartNumberUpdatedToDB = False
+                End If
+            Else
+                IsPartNumberUpdatedToDB = False
+                MessageBox.Show("Contract Number is not available")
+            End If
+        Catch ex As Exception
+            IsPartNumberUpdatedToDB = False
+        End Try
+    End Function
+
+    Private Function DoesContractExists(ByVal strCustomerName As String, ByVal strContractNumber As String) As DataRow
+        DoesContractExists = Nothing
+        Try
+            Dim strQuery As String = "select * from ContractDetails_Revision where ContractNumber ='" & strContractNumber & "' and CustomerName ='" & strCustomerName & "'"
+            DoesContractExists = IFLConnectionObject.GetDataRow(strQuery)
+            If DoesContractExists Is Nothing Then
+                DoesContractExists = Nothing
+            End If
+        Catch ex As Exception
+            DoesContractExists = Nothing
+        End Try
+
+    End Function
+    'anup 24-01-2011 till here
+
+    Private Function OpenSheet(ByVal strFileName As String) As ExcelUtil
+        Dim oExcel As New ExcelUtil
+
+        If Not oExcel.OpenWorkBook(strFileName, False) Then
+            Return Nothing
+        End If
+
+        If Not oExcel.OpenWorksheet("Sheet1") Then
+            Return Nothing
+        End If
+
+        Return oExcel
+    End Function
+
+    Private Function GetFileLocation() As String
+
+        Dim strFileName As String = Nothing
+        Dim oOpenFileWindow As New OpenFileDialog
+        oOpenFileWindow.Multiselect = False
+        oOpenFileWindow.InitialDirectory = "D:\Raju_Home\SDGT\HookUps\Testing"
+        oOpenFileWindow.Filter = " Excel Files 2003 (*.xls)|*.xls|Excel Files 2007 (*.xlsx)|*.xlsx|Excel Files 2007 (*.xlsm)|*.xlsm"
+        oOpenFileWindow.RestoreDirectory = True
+        oOpenFileWindow.Title = "Select HookUp"
+        If oOpenFileWindow.ShowDialog = Windows.Forms.DialogResult.OK Then
+            strFileName = oOpenFileWindow.FileName
+            'Else
+            '    txtFileLocation.Text = ""
+        End If
+        Return strFileName
+
+    End Function
+
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+
+        Module1.ArraList1.Clear()
+        Module1.ArraList2.Clear()
+
+        BrowseFileName = GetFileLocation()
+        If BrowseFileName Is Nothing Then
+            _btnVisible = False
+            Return
+        End If
+        'LVCustomer.Items.Clear()
+        'lvwContractDetails.Items.Clear()
+
+        oExcel = OpenSheet(BrowseFileName)
+       
+        If oExcel Is Nothing Then
+            _btnVisible = False
+            Throw New Exception("File not found exception.")
+        Else
+
+            If Module1.ArraList1.Count <= 0 Then
+                If Not CheckExcelValues() Then
+                    ErrorMessages()
+                    Exit Sub
+                End If
+                Module1.ArraList1 = SettingValuesFromExcelToArrayList(excelRowNoTable1, excelRowNoTable2)
+            End If
+            SettingValuesFromExcel(Module1.ArraList1)
+
+            If Not oExcel.Read(excelRowNoTable1 + 1, 1) Is Nothing Then
+
+                excelRowNoTable1 = excelRowNoTable1 + 1
+                excelRowNoTable2 = excelRowNoTable2 + 1
+
+                If Not CheckExcelValues() Then
+                    ErrorMessages()
+                    Exit Sub
+                End If
+
+                Module1.ArraList2 = SettingValuesFromExcelToArrayList(excelRowNoTable1, excelRowNoTable2)
+            End If
+
+
+        End If
+
+            'strCustomerName = ReadValuesFromExcel.CustomerName
+            'Dim listView As ListViewItem
+            'listView = LVCustomer.Items.Add(strCustomerName)
+            'LVCustomer.Items(0).Selected = True
+
+            'Dim boolValuePresent As Boolean = False
+            ''CustomerDetails()
+
+            'For j As Integer = 0 To List.Count - 1
+            '    If List.Item(j).ToString() = ReadValuesFromExcel.CustomerPortCode.ToString() Then
+            '        lvwContractDetails.Items(j).Selected = True
+            '        boolValuePresent = True
+            '        Exit For
+            '    End If
+            'Next
+            'If Not boolValuePresent Then
+            '    MessageBox.Show("Please Enter valid Code Number")
+            '    Return
+            'End If
+            _btnVisible = True
+
+            cmbCustomerName.Text = oReadValuesFromExcel.CustomerName
+            cmbAssemblyType.Text = oReadValuesFromExcel.Type
+            txtlPartCode.Text = oReadValuesFromExcel.CustomerPortCode
+
+            mdiMonarch.GetExcelFile()
+
+            oExcel.Close()
+
+    End Sub
+
+    Public Sub ReadingExcelRowvalues()
+
+        SettingValuesFromExcel(Module1.ArraList2)
+
+        'mdiMonarch.DisplayForm()
+
+        mdiMonarch.GenerateBtnFuctionality(mdiMonarch.GenerateBtnSender)
+
+        Exit Sub
+
+    End Sub
+
+    Private Function CheckExcelValues() As Boolean       'SUGANDHI
+
+        Dim bool As Boolean = False
+
+        For j As Integer = 1 To 32
+            If oExcel.Read(excelRowNoTable1, j) Is Nothing Then
+                Dim s As String = oExcel.Read(excelRowNoTable1 - 1, j - 1)
+                'Dim s As String = "Please fill the Cell at (" + i.ToString() + " , " + j.ToString() + ")"
+                Module1.LogInfo.Add(oExcel.Read(excelRowNoTable1 - 1, j - 1) + "  :  " + "Please fill the Cell at (" + excelRowNoTable1.ToString() + " , " + j.ToString() + ")")
+                bool = True
+            End If
+        Next
+
+        For l As Integer = 1 To 29
+            If oExcel.Read(excelRowNoTable2, l) Is Nothing Then
+                Module1.LogInfo.Add(oExcel.Read(excelRowNoTable2 - 1, l - 1) + "  :  " + "Please fill the Cell at (" + excelRowNoTable2.ToString() + " , " + l.ToString() + ")")
+                bool = True
+            End If
+        Next
+
+        If bool Then
+            Return False
+        Else
+            Return True
+            isFirstRowGenerated = True
+        End If
+
+    End Function
+
+    Public Sub ErrorMessages()                 'SUGANDHI
+
+        Dim listView As ListViewItem
+
+        For Each oMessage As String In Module1.LogInfo
+
+            listView = lVLogInformation.Items.Add(oMessage)
+            'listView.SubItems.Add(oMessage.getMessage)
+            listView.ForeColor = Color.Red
+        Next
+
+    End Sub
+
+    Public Function SettingValuesFromExcelToArrayList(ByVal oExcelRowNoTable1 As Integer, ByVal oExcelRowNoTable2 As Integer) As ArrayList
+
+        Dim arrList As New ArrayList
+
+        arrList.Add(oExcel.Read("B" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("C" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("D" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("E" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("F" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("G" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("H" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("I" + excelRowNoTable1.ToString()))
+
+        If oExcel.Read("J" + excelRowNoTable1.ToString()).ToString() = "Yes" Then
+            arrList.Add("True")
+        Else
+            arrList.Add("False")
+        End If
+
+        arrList.Add(oExcel.Read("K" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("L" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("M" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("N" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("O" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("P" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("Q" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("R" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("S" + excelRowNoTable1.ToString()))
+        arrList.Add(oExcel.Read("T" + excelRowNoTable1.ToString()))
+
+        If oExcel.Read("U" + excelRowNoTable1.ToString()).ToString() = "Yes" Then
+            arrList.Add("True")
+        Else
+            oReadValuesFromExcel.StrokeControl = False
+        End If
+        'oReadValuesFromExcel.StrokeControl = ExcelFile.Read("V3")
+
+        oReadValuesFromExcel.StrokeControlStages = Convert.ToInt32(ExcelFile.Read("V" + excelRowNoTable1.ToString()))
+
+        If ExcelFile.Read("W" + excelRowNoTable1.ToString()).ToString() = "Yes" Then
+
+            oReadValuesFromExcel.ClevisCapPins = True
+        Else
+            oReadValuesFromExcel.ClevisCapPins = False
+        End If
+        'oReadValuesFromExcel.ClevisCapPins = ExcelFile.Read("X3")
+
+        If ExcelFile.Read("X" + excelRowNoTable1.ToString()).ToString() = "Yes" Then
+            oReadValuesFromExcel.RodClevisPins = True
+        Else
+            oReadValuesFromExcel.RodClevisPins = False
+        End If
+        ' oReadValuesFromExcel.RodClevisPins = ExcelFile.Read("Y3")
+
+        oReadValuesFromExcel.PinMaterial = ExcelFile.Read("Y" + excelRowNoTable1.ToString())
+        oReadValuesFromExcel.ClevisCapPinClips = ExcelFile.Read("Z" + excelRowNoTable1.ToString())
+        oReadValuesFromExcel.ThreadProtected = ExcelFile.Read("AA" + excelRowNoTable1.ToString())
+        ' oReadValuesFromExcel.RodSealPackage = ExcelFile.Read("AC3")
+
+        If ExcelFile.Read("AB" + excelRowNoTable1.ToString()).ToString() = "Yes" Then
+            oReadValuesFromExcel.RodClevisCheck = True
+        Else
+            oReadValuesFromExcel.RodClevisCheck = False
+        End If
+        'oReadValuesFromExcel.RodClevisCheck = ExcelFile.Read("AD3")
+
+        oReadValuesFromExcel.RodEndThreadSize = Convert.ToDouble(ExcelFile.Read("AC" + excelRowNoTable1.ToString()))
+        oReadValuesFromExcel.RodClevisPinClips = ExcelFile.Read("AD" + excelRowNoTable1.ToString())
+        oReadValuesFromExcel.PistonStealPackage = ExcelFile.Read("AE" + excelRowNoTable1.ToString())
+        oReadValuesFromExcel.Paint = ExcelFile.Read("AF" + excelRowNoTable1.ToString())
+        ' oReadValuesFromExcel.RodWiper = ExcelFile.Read("AI3")
+        oReadValuesFromExcel.GenerationType = ExcelFile.Read("AG" + excelRowNoTable1.ToString())
+
+        oReadValuesFromExcel.PinsAreInLineWithPort = Convert.ToInt32(ExcelFile.Read("B" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.RetractedLengthTieRod3 = Convert.ToInt32(ExcelFile.Read("C" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.ExtendedLengthTieRod3 = Convert.ToInt32(ExcelFile.Read("D" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.RodDiameterTieRod3 = Convert.ToInt32(ExcelFile.Read("E" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.Ports = Convert.ToInt32(ExcelFile.Read("F" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.PercentAirTest = Convert.ToInt32(ExcelFile.Read("G" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.PercentOilTest = Convert.ToInt32(ExcelFile.Read("H" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.RephaseOnExtension = Convert.ToInt32(ExcelFile.Read("I" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.RephaseOnRetraction = Convert.ToInt32(ExcelFile.Read("J" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.InstallStrokeControl = Convert.ToInt32(ExcelFile.Read("K" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.StampCustomerPartAndDateCodeOnTube = Convert.ToInt32(ExcelFile.Read("L" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.StampCustomerPartOnTube = Convert.ToInt32(ExcelFile.Read("M" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.StampCountryOfOriginOnTube = Convert.ToInt32(ExcelFile.Read("N" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.RodMaterialsNitroSteel = Convert.ToInt32(ExcelFile.Read("O" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.InstallSteelPlugsInAllPorts = Convert.ToInt32(ExcelFile.Read("P" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.InstallHardenedBushingsAndRodClevisEnd = Convert.ToInt32(ExcelFile.Read("Q" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.InstallHardenedBushingsAndClevisCapEnd = Convert.ToInt32(ExcelFile.Read("R" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.AssemblyStopTubeToCylinder = Convert.ToInt32(ExcelFile.Read("S" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.MaskPerBOMAndSOP = Convert.ToInt32(ExcelFile.Read("T" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.MaskBushingsBeforePainting = Convert.ToInt32(ExcelFile.Read("U" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.MaskExposedThreadsAfterWashing = Convert.ToInt32(ExcelFile.Read("V" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.MaskPinHoles = Convert.ToInt32(ExcelFile.Read("W" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.Prime = Convert.ToInt32(ExcelFile.Read("X" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.PaintTieRod3 = Convert.ToInt32(ExcelFile.Read("Y" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.AffixLabelPerSOP = Convert.ToInt32(ExcelFile.Read("Z" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.IncludePinKitPerBOM = Convert.ToInt32(ExcelFile.Read("AA" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.PackCylinderInPlasticBag = Convert.ToInt32(ExcelFile.Read("AB" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.AffixLabelToBag = Convert.ToInt32(ExcelFile.Read("AC" + excelRowNoTable2.ToString()))
+        oReadValuesFromExcel.PackagePerSOP = Convert.ToInt32(ExcelFile.Read("AD" + excelRowNoTable2.ToString()))
+
+        Module1.ReadValuesFromExcel = oReadValuesFromExcel
+
+    End Sub
+End Class

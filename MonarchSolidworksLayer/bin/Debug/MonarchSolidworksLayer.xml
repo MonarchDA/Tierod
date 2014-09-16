@@ -1,0 +1,300 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MonarchSolidworksLayer
+</name>
+</assembly>
+<members>
+<member name="P:MonarchSolidworksLayer.IFLSolidWorksClass.ErrorMessage">
+	<summary>
+ This property is used to assign the error message.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MonarchSolidworksLayer.IFLSolidWorksClass.ErrorObject">
+	<summary>
+ This property is used to assign the error object.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MonarchSolidworksLayer.IFLSolidWorksClass.IsCurrentSolidWorks">
+	<summary>
+ gets the Current Solidworks object.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MonarchSolidworksLayer.IFLSolidWorksClass.SwSelMgr">
+	<summary>
+ sets the Selection manger object.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:MonarchSolidworksLayer.IFLSolidWorksClass.SwFeature">
+	<summary>
+ gets the feature object of the model document.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.DxfConversion1(System.String,System.String)">
+	<summary>
+ Converts the Drawing document to DXF.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.deleteUnattached_Dimensions">
+	<summary>
+ Deletes the unattached dimensions in the drawing document.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.DrawBox">
+	<summary>
+ Creates the Envelop box to the model document.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.getMassProperties(System.Double@,System.Double@,System.Double@,System.Double@)">
+	<summary>
+ Gets or sets the mass properties of the model document.
+ </summary>
+	<param name="cg_x"></param>
+	<param name="cg_y"></param>
+	<param name="cg_z"></param>
+	<param name="mass"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.mateConstraints(System.String,System.String,System.Int32,System.String)">
+	<summary>
+ mates  components in an assembly document.
+ </summary>
+	<param name="_strPlane1"></param>
+	<param name="_strPlane2"></param>
+	<param name="_strmate1"></param>
+	<param name="_strmate2"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.ReplaceComponentWithInstance(System.String,System.String,System.String)">
+	<summary>
+ Replacement of the component in an assembly document.
+ </summary>
+	<param name="_strCompName"></param>
+	<param name="_strReplaceCompName"></param>
+	<param name="_strTransformerType"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.ReferenceCutLogics(System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ performs the reference cut of the component.
+ </summary>
+	<param name="_strCompName"></param>
+	<param name="_strPlaneName"></param>
+	<param name="_strSketchName"></param>
+	<param name="_strTransformerType"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.FeatureSuppression(System.Object)">
+	<summary>
+ sets the feature suppression of the model document.
+ </summary>
+	<param name="_SearchStr"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.DistanceMating(System.String,System.String,System.String,System.String,System.Double,System.Boolean)">
+	<summary>
+ Performs the distance matings of the two components.
+ </summary>
+	<param name="_strPlane1"></param>
+	<param name="_strPlane2"></param>
+	<param name="_strmate1"></param>
+	<param name="_strmate2"></param>
+	<param name="_dblDistance"></param>
+	<param name="_blnFlip"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.EnableConfigurations(System.String,System.String)">
+	<summary>
+ Enables the Configurations of the model document.
+ </summary>
+	<param name="_strconfigName"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.DeleteConfiguration(System.String)">
+	<summary>
+ Deletes the Given configuration.
+ </summary>
+	<param name="_strConfigName"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.deleteSuppressParts(System.Collections.ArrayList)">
+	<summary>
+ Deletes the suppression parts.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.Common_TraversAndDeletions_And_SuppressionParts">
+	<summary>
+ Traverses the components and 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.ViewScaling(System.Decimal,System.String,System.String)">
+	<summary>
+ Updating the scaling dimensions to the individual views of the drawing document.
+ </summary>
+	<param name="_dScaleRatio"></param>
+	<param name="_strDrawigFileName"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.ScalingForOneView(System.String,System.String,System.Decimal)">
+	<summary>
+ Sets the individual view scaling for the views.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.AutoBallooning(System.String,System.String)">
+	<summary>
+ Sets the auto ballooning for the selected view
+ </summary>
+	<param name="_strSheetName"></param>
+	<param name="_strViewName"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.AutoBallooning">
+	<summary>
+ gets the Auto ballooning for the drawing document.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.getPartNumber(System.String)">
+	<summary>
+ Gets the part number of the document.
+ </summary>
+	<param name="_strPartPath"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.GetParameters(System.String)">
+	<summary>
+ Gets the parameters of the modele document.
+ </summary>
+	<param name="_strPartAssemblyFileName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.DeleteDesignTable(System.String)">
+	<summary>
+ Deletes the design table.
+ </summary>
+	<param name="strPartFileName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.DeleteEquation(System.String)">
+	<summary>
+ Deletes the equation of model document.
+ </summary>
+	<param name="_strPartAssemblyFileName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.SetCurrentWorkingDirectory(System.String)">
+	<summary>
+ sets the current working directory.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.createEnvelop">
+	<summary>
+ Creates the Envelop for the assembly document.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.GetCurrentConfigName">
+	<summary>
+ Gets the configuration name of the model document.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.DecimalToFeetInches(System.Object,System.Int32)">
+	<summary>
+ Convertion of Decimal to feet inches for creating the envelop box boundaries.
+ </summary>
+	<param name="oDecimalLength"></param>
+	<param name="_iDenominator"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.FractUp(System.Int32,System.Int32,System.Int32,System.Int32)">
+	<summary>
+  Measures the inches for creating the envelop box boundaries.
+ </summary>
+	<param name="_iInputFt"></param>
+	<param name="_iInputInch"></param>
+	<param name="_iInputNum"></param>
+	<param name="_iInputDenom"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.TraverseComponentForInstance(SldWorks.Component2,System.Int64)">
+	<summary>
+ Gets the instance number of the model by traverses the model tree.
+ </summary>
+	<param name="oSwComp"></param>
+	<param name="_nLevel"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.getInstanceNumber(System.String)">
+	<summary>
+ Gets the maximum number of instance number of the model document.
+ </summary>
+	<param name="_strReplacedComponent"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.TraverseComponent(SldWorks.Component2,System.Int64,SldWorks.Component2)">
+	<summary>
+ Traverses the entire tree and returns the maximum instance number of the component.
+ </summary>
+	<param name="oSwComp"></param>
+	<param name="_nLevel"></param>
+	<param name="oSwComp1"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksClass.DeleteFeatures(System.String)">
+	<summary>
+ Deletes the Feature.
+ </summary>
+	<param name="_strFeatureName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksBaseClass.ConnectSolidWorks">
+	<summary>
+ Opens the solidworks Session.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksBaseClass.SaveAndCloseAllDocuments">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksBaseClass.SaveAndCloseDocument(System.String)">
+	<summary>
+ Closes the specified document.
+ </summary>
+	<param name="docName"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksBaseClass.openDocument(System.String)">
+	<summary>
+ Opens the document.
+ </summary>
+	<param name="_strDocName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksBaseClass.CheckFileType(System.String)">
+	<summary>
+ Checks the type of the documet[i.e , part or assembly or drawing]
+ </summary>
+	<param name="_strPartAssemblyFileName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchSolidworksLayer.IFLSolidWorksBaseClass.killSolidWorks(System.String)">
+	<summary>
+ SolidWorks session process will be killed in case of unhandled exception case.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:MonarchSolidworksLayer.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MonarchSolidworksLayer.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MonarchSolidworksLayer.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

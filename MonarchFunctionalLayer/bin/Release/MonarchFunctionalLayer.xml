@@ -1,0 +1,394 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MonarchFunctionalLayer
+</name>
+</assembly>
+<members>
+<member name="P:MonarchFunctionalLayer.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MonarchFunctionalLayer.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MonarchFunctionalLayer.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="F:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass._oTable">
+ -----------------------------------------------------------------------------
+ <summary>
+ This variable is used to get the Datatable from the database.
+ </summary>
+	<remarks>
+ Using this _oTable we can store the current table name..
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass._SourceForm">
+ -----------------------------------------------------------------------------
+ <summary>
+  This variable is used to get the form.
+ </summary>
+	<remarks>
+ This is used to assign the current form.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.odataRow">
+ -----------------------------------------------------------------------------
+ <summary>
+  This variable is used to get the form.
+ </summary>
+	<remarks>
+  The below variable is used to create a row.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass._strErrorMessage">
+ -----------------------------------------------------------------------------
+ <summary>
+  The below variable is used to give the Error message when exception raises.
+ </summary>
+	<remarks>
+  The below variable is used to give the Error message when exception raises.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass._oErrorObject">
+ -----------------------------------------------------------------------------
+ <summary>
+ The below variable is used to give the Error object when exception raises.
+ </summary>
+	<remarks>
+ The below variable is used to give the Error object when exception raises.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.SourceForm">
+ -----------------------------------------------------------------------------
+ <summary>
+ This property is used to store the current form.
+ </summary>
+	<value></value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[satishkumar.hv]	8/4/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.aTableStructure">
+ -----------------------------------------------------------------------------
+ <summary>
+ This property is used as an arraylist to store the specified fields.
+ </summary>
+	<value>Arraylist is the datatype, used to store values.</value>
+	<remarks>
+ This is used to store the items.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/4/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.ErrorMessage">
+ -----------------------------------------------------------------------------
+ <summary>
+ This property is used to assign the error message.
+ </summary>
+	<value>
+ _strErrorMessage which stores the Error message its an exception type.
+ </value>
+	<remarks>
+ This property is used to store the error message and displays that message to the user.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.ErrorObject">
+ -----------------------------------------------------------------------------
+ <summary>
+ This property is used to assign the error object.
+ </summary>
+	<value>
+ Exception type.
+ </value>
+	<remarks>
+ Used to store the object which will be catch in the catch method.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.CreateSourceTable(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ This procedure is used to create a source table 
+ </summary>
+	<param name="strFormName">Form name as a string.</param>
+	<returns></returns>
+	<remarks>
+ It will return a table object that can be created with specified structure which contains the tab index, control name and control value
+ </remarks>
+	<history>
+ 	[swamy.reddy]	8/4/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.AddDataToTable(System.Windows.Forms.Control)">
+ -----------------------------------------------------------------------------
+ <summary>
+ This procedure is used to add the Control information into the Table
+ </summary>
+	<param name="ocontrol">ocontrol is the control of the respective form.</param>
+	<remarks>
+ It will check the controls and with tabindex it will store the respective control value into the database.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/4/2008	Created
+     [Pradeep Sen]	    8/8/2008	Modified : Cause given in the line of change
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.FindControl(System.Windows.Forms.Control)">
+ -----------------------------------------------------------------------------
+ <summary>
+ This procedure is used to find  the control.
+ </summary>
+	<param name="oFormControl">oFormControl is the control of the respective form.</param>
+	<remarks>
+ This procedure will check the whether the control is radiobutton, checkbox, textbox, like this it will check the form controls.
+ 
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.SetControlValue(System.Windows.Forms.Control)">
+ -----------------------------------------------------------------------------
+ <summary>
+  This procedure is used to set the control value.
+ </summary>
+	<param name="ocontrol">ocontrol is the control of the respective form.</param>
+	<remarks>
+ This will find the control of the form , and it will store the control value .
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.GetControls(System.Windows.Forms.Control)">
+ -----------------------------------------------------------------------------
+ <summary>
+ This procedue is used to get the controls of the form
+ </summary>
+	<param name="oFormControl">This is used to store the form control</param>
+	<remarks>
+ This procedue is used to get the controls of the form
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+ 
+
+</member><member name="M:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.CheckTableStructure">
+ -----------------------------------------------------------------------------
+ <summary>
+ This function is used to check the table struture.
+ </summary>
+	<returns>Boolean is the return type, if the table doesnt have structure it will return false else true.</returns>
+	<remarks>
+ It will equate the table name with the form if they are equal it will check whether the array items exist in the 
+ table columns if they are it will return true else false.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/4/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.SetDataToForm(System.Data.DataTable,System.Windows.Forms.Form)">
+ -----------------------------------------------------------------------------
+ <summary>
+ This function is used to set the form with data.
+ </summary>
+	<returns>Boolean is the return type, if the data is not set to the form it will return false else true.</returns>
+	<remarks>
+ This function is used to set the data to the form with datatable and form as an parameters.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/4/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.SortTable">
+ -----------------------------------------------------------------------------
+ <summary>
+ This function is used to sort the table.
+ </summary>
+	<returns>dataview is the return type, which is stored into the SortTable.</returns>
+	<remarks>
+ This function is used to sort the table with the tabindex.
+ </remarks>
+	<history>
+ 	[satishkumar.hv]	8/5/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass.StoreFormData(System.Windows.Forms.Control)">
+ -----------------------------------------------------------------------------
+ <summary>
+ This function is used to retreive and store all controls information.
+ </summary>
+	<param name="oFormControl">This is used to store the form control. </param>
+	<returns>Datatable is the return type</returns>
+	<remarks>
+ This function will check the each tab page and in that it will check the tab control.
+ </remarks>
+	<history>
+ 	[swamy.reddy]	8/4/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass">
+ -----------------------------------------------------------------------------
+ Project	 : IFLGetSetUIProject
+ Class	 : IFLGetSetUI.IFLGetSetUIClass
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ It will store and retrieve the respective form data.
+ </summary>
+ This class is used to deal with the getting and setting the UI.
+ <remarks>
+ This Class IFLGetSetUIClass is used to set the form values into database and retrive them when required.
+ </remarks>
+	<history>
+ 	[swamy.reddy]	8/4/2008	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:MonarchFunctionalLayer.clsimgcapture.CaptureScreen">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="T:MonarchFunctionalLayer.clsimgcapture">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.validateForm(System.Windows.Forms.Form)">
+	<summary>
+ Checks the validation for the empty fields.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.GetControlValue(System.String,System.String)">
+	<summary>
+	</summary>
+	<param name="strFormName"></param>
+	<param name="strControlName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.GetCurrentControlValue(System.Collections.Hashtable,System.String)">
+	<summary>
+	</summary>
+	<param name="oHashTable"></param>
+	<param name="strcontrolname"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.getValue(System.String,System.Collections.ArrayList)">
+	<summary>
+	</summary>
+	<param name="key"></param>
+	<param name="alist"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.ValidateAlphabetWithDecimal(System.Windows.Forms.KeyPressEventArgs@,IFLCustomUILayer.IFLTextBox@,System.String)">
+	<summary>
+	</summary>
+	<param name="e"></param>
+	<param name="oControl"></param>
+	<param name="strMessage"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.getValue(System.String,System.String)">
+	<summary>
+	</summary>
+	<param name="formName"></param>
+	<param name="controlName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.getValueGridValues(System.String,System.Collections.ArrayList)">
+	<summary>
+	</summary>
+	<param name="Key"></param>
+	<param name="alist"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.PopulateInputTable">
+	<summary>
+	</summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.IsCharNumbersBackspaceDecimal(System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+	</summary>
+	<param name="e"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.setUserInformation(IFLCustomUILayer.IFLNumericBox,System.String,System.Windows.Forms.ToolStripStatusLabel)">
+	<summary>
+ Provides the help of the controls in the Status strip.
+ </summary>
+	<param name="textBoxControlName"></param>
+	<param name="strInfo"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.NumericTextboxKeyPressEvent(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+	</summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:MonarchFunctionalLayer.FunctionalClass.ShowDialogOnInvalidValues(System.Windows.Forms.DataGridViewCellValidatingEventArgs,System.Object@)">
+	<summary>
+	</summary>
+	<param name="e"></param>
+	<param name="oParameter"></param>
+	<remarks></remarks>
+</member><member name="T:MonarchFunctionalLayer.FunctionalClass.CoreTableColumns">
+	<summary>
+ This enum is to describe the items in the arraylist CoreDetailsTable
+ </summary>
+	<remarks></remarks>
+</member><member name="T:MonarchFunctionalLayer.FunctionalClass.Inputs">
+	<summary>
+ This enum is to describe the items in the arraylist UserInputsMinMaxImages
+ </summary>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

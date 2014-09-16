@@ -1,0 +1,16 @@
+Public Module ModuleGeneratedModelNames
+
+    Private _ArrayListModelName As New ArrayList
+#Region "Properties"
+
+    Public Property ArrayListModelName() As ArrayList
+        Get
+            Return _ArrayListModelName
+        End Get
+        Set(ByVal value As ArrayList)
+            _ArrayListModelName = value
+        End Set
+    End Property
+#End Region
+
+End Module

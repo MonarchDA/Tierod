@@ -1,0 +1,43 @@
+Public Module Module1            'SUGANDHI
+
+    Private oReadValuesFromExcel As ReadValuesFromExcel
+    Private oLogInfo As New ArrayList
+    Private oArraList1 As New ArrayList
+    Private oArraList2 As New ArrayList
+
+    Public Property ReadValuesFromExcel() As ReadValuesFromExcel
+        Get
+            Return oReadValuesFromExcel
+        End Get
+        Set(ByVal value As ReadValuesFromExcel)
+            oReadValuesFromExcel = value
+        End Set
+    End Property
+
+    Public Property LogInfo() As ArrayList
+        Get
+            Return oLogInfo
+        End Get
+        Set(ByVal value As ArrayList)
+            oLogInfo = value
+        End Set
+    End Property
+
+    Public Property ArraList1() As ArrayList
+        Get
+            Return oArraList1
+        End Get
+        Set(ByVal value As ArrayList)
+            oArraList1 = value
+        End Set
+    End Property
+
+    Public Property ArraList2() As ArrayList
+        Get
+            Return oArraList2
+        End Get
+        Set(ByVal value As ArrayList)
+            oArraList2 = value
+        End Set
+    End Property
+End Module

@@ -1,0 +1,1036 @@
+Imports MonarchFunctionalLayer
+Public Class frmTieRod2
+    Dim dblCylinderForce_PullForce As Double
+
+    Private oBool As Boolean = False
+
+    Public Property IsErrorMessageTierod2() As Boolean
+        Get
+            Return oBool
+        End Get
+        Set(ByVal value As Boolean)
+            oBool = value
+        End Set
+    End Property
+
+    Private Sub cmbPinMaterial_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPinMaterial.SelectedIndexChanged
+        If Trim(sender.selectedItem) <> "" Then
+            Try
+                If optPinsYes.Checked = True Then    '06_04_2010    RAGAVA
+                    Dim oListViewItem As ListViewItem
+                    If LVPinSizeDetails.SelectedItems.Count > 0 Then
+                        oListViewItem = LVPinSizeDetails.SelectedItems(0)
+                        'oListViewItem = LVPinSizeDetails.Items(LVPinSizeDetails.GetCurrentIndex)
+                        Dim strQuery As String
+                        Dim objDT As DataTable
+                        cmbClips.Items.Clear()
+                        cmbClips.Items.Add(" ")
+                        strQuery = ""
+                        strQuery = "select distinct PinType from ClevisPinDetails where PinHoleSize = " & Val(oListViewItem.SubItems(0).Text) & " and PinMaterial = '" & Trim(cmbPinMaterial.SelectedItem) & "' And  " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " >= BoreDiameterMinimum and " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " < = BoreDiameterMaximum"
+                        objDT = oDataClass.GetDataTable(strQuery)
+                        For Each dr As DataRow In objDT.Rows
+                            cmbClips.Items.Add(dr(0).ToString)
+                        Next
+                        '09_10_2009
+                        If objDT.Rows.Count = 1 Then
+                            cmbClips.SelectedIndex = 1
+                            cmbClips.Enabled = False
+                        Else
+                            cmbClips.Enabled = True
+                            cmbClips.SelectedItem = "Cotter Pins"                   '11_11_2009   Ragava
+                        End If
+                    End If
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub cmbRodSealPackage_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRodSealPackage.SelectedIndexChanged
+        If Trim(sender.SelectedItem) <> "" Then
+            Dim strQuery As String
+            Dim oListViewItem As ListViewItem
+            If ofrmTieRod1.LVRodDiameterDetails.Items.Count > 0 Then
+                oListViewItem = ofrmTieRod1.LVRodDiameterDetails.SelectedItems(0)
+                ' oListViewItem = ofrmTieRod1.LVRodDiameterDetails.Items(ofrmTieRod1.LVRodDiameterDetails.GetCurrentIndex)
+                strQuery = ""
+                Dim arrSeries As String()
+                If SeriesForCosting.ToString.StartsWith("TP") Then
+                    arrSeries = SeriesForCosting.ToString.Split("-")
+                Else
+                    arrSeries = SeriesForCosting.ToString.Split(" ")
+                End If
+                Dim strSeries As String = arrSeries(0)
+                '27_10_2009  Ragava
+                'strQuery = "Select PartNumber,RodCapDescription from RodCapDetails where BoreDiameter = " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " and RodDiameter =" & Val(oListViewItem.SubItems(0).Text) & " and " & GetClevisCapDetails() & " and PortDimensions = '" & Trim(ofrmTieRod1.cmbRodCapPort.SelectedItem) & "'"
+                Dim strRod() As String = Trim(cmbRodSealPackage.SelectedItem).ToString.Split("+")
+                Dim strNotes As String = Trim(strRod(UBound(strRod)))
+                If strNotes = "Garlock" Or strNotes = "Glass Filled Nylon" Then
+                    strQuery = "Select PartNumber,RodCapDescription from RodCapDetails where BoreDiameter = " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " and RodDiameter =" & Val(oListViewItem.SubItems(0).Text) & " and " & GetClevisCapDetails(True) & " and PortDimensions = '" & Trim(ofrmTieRod1.cmbRodCapPort.SelectedItem) & "' and Notes = '" & strNotes & "'" 'ANUP 21-10-2010 START
+                    For Each strCol As String In strRod
+                        If strCol <> Trim(strRod(UBound(strRod))) Then
+                            strQuery = strQuery & " and " & Trim(strCol) & " <> ''"
+                        End If
+                    Next
+                Else
+                    strQuery = "Select PartNumber,RodCapDescription from RodCapDetails where BoreDiameter = " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " and RodDiameter =" & Val(oListViewItem.SubItems(0).Text) & " and " & GetClevisCapDetails(True) & " and PortDimensions = '" & Trim(ofrmTieRod1.cmbRodCapPort.SelectedItem) & "'" ' and " & strNotes & " <> ''"'ANUP 21-10-2010 START
+                    For Each strCol As String In strRod
+                        strQuery = strQuery & " and " & Trim(strCol) & " <> ''"
+                    Next
+                    strQuery = strQuery & " and Notes ='No'"
+                End If
+                '27_10_2009  Ragava   Till  Here
+                Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+                If objDT.Rows.Count > 0 Then
+                    txtRodCap.Text = objDT.Rows(0).Item(0).ToString
+                    If txtRodCap.Text = "" Then
+                        If blnRevision = False Then
+                            MessageBox.Show("Rod Cap is not available for this configuration!" + vbNewLine + "Please select another configuration", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            cmbRodSealPackage.Focus()
+                        End If
+                    Else
+                        strRodCapCodeNumber = objDT.Rows(0).Item("PartNumber").ToString
+                        strRodCapDrawingNumber = "N/A"
+                        strRodCapDescription = objDT.Rows(0).Item("RodCapDescription").ToString
+                        mdiMonarch.mdiComponent.Items(7).SubItems.Add(strRodCapCodeNumber)
+                        mdiMonarch.mdiComponent.Items(7).SubItems.Add(strRodCapDrawingNumber)
+                        mdiMonarch.mdiComponent.Items(7).SubItems.Add(strRodCapDescription)
+                    End If
+                End If
+            Else
+                txtRodCap.Clear()
+            End If
+        End If
+        LoadInformation()
+    End Sub
+    '06_04_2010   RAGAVA
+    'Private Sub LoadClevis()
+    '    Try
+    '        Dim strQuery As String
+    '        strQuery = ""
+    '        dblCylinderForce_PullForce = Val(ofrmTieRod1.txtWorkingPressure.Text) * (3.1416 / 4) * (Math.Pow(BoreDiameter, 2) - Math.Pow(IIf(RodDiameter = 1.12, 1.125, RodDiameter), 2))
+    '        dblCylinderPullForce = dblCylinderForce_PullForce
+    '        strQuery = "select Description,PullForceMaximum from RodClevisDetails where "     '05_04_2010     RAGAVA
+    '        strQuery = strQuery + " pinHoleSize=" & PinSize & " and pinHoleType='" & ofrmTieRod1.cmbRodClevisPinHole.SelectedItem & "'  and " & dblCylinderForce_PullForce & "<= pullforcemaximum and ThreadSize <= " & RodDiameter.ToString & " and Series = '" & IIf(Trim(ofrmTieRod1.cmbSeries.SelectedItem.ToString).StartsWith("TX"), "TX", "TL") & "'"      '20_04_2010   RAGAVA
+    '        Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+    '        If objDT.Rows.Count = 0 Then
+    '            If blnRevision = False Then
+    '                MessageBox.Show("Rod Clevis is not available for the selected Configuration", "Information", MessageBoxButtons.OK)
+    '            End If
+    '            Me.rdbRodClevisNo.Checked = True
+    '            Me.rdbRodClevisYes.Enabled = False
+    '            Me.optPinsNo_Rod.Checked = True                   '13_04_2010   RAGAVA
+    '            Me.optPinsYes_Rod.Enabled = False                 '13_04_2010   RAGAVA
+    '        Else
+    '            Me.rdbRodClevisNo.Checked = False
+    '            Me.rdbRodClevisYes.Enabled = True
+    '            Me.rdbRodClevisYes.Checked = True
+    '            Me.optPinsNo_Rod.Checked = False                 '13_04_2010   RAGAVA
+    '            Me.optPinsYes_Rod.Enabled = True                 '13_04_2010   RAGAVA
+    '            Me.optPinsYes_Rod.Checked = True                 '13_04_2010   RAGAVA
+    '        End If
+    '        Try
+    '            Dim aColumns As New ArrayList
+    '            LVRodClevis.Columns.Clear()
+    '            aColumns.Add(New Object(2) {"Description", "Description", True})
+    '            aColumns.Add(New Object(2) {"PullForceMaximum", "Maximum" + vbNewLine + "Rated Pull Force", True})
+    '            LVRodClevis.DisplayHeaders = aColumns
+    '            Dim oTable As DataTable = objDT
+    '            oTable.Columns.Add("Cost")
+    '            LVRodClevis.FlushListViewData()
+    '            LVRodClevis.SourceTable = objDT
+    '            LVRodClevis.Populate()
+    '            '09_10_2009
+    '            If objDT.Rows.Count = 1 Then
+    '                LVRodClevis.Items(0).Selected = True
+    '                LVRodClevis.Enabled = False
+    '            Else
+    '                LVRodClevis.Enabled = True
+    '            End If
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message)
+    '        End Try
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '    End Try
+    'End Sub
+
+    Private Sub LoadClevis()
+        Try
+            Dim strQuery As String
+            strQuery = ""
+            dblCylinderForce_PullForce = Val(ofrmTieRod1.txtWorkingPressure.Text) * (3.1416 / 4) * (Math.Pow(BoreDiameter, 2) - Math.Pow(IIf(RodDiameter = 1.12, 1.125, IIf(RodDiameter = 1.38, 1.375, RodDiameter)), 2))
+            dblCylinderPullForce = dblCylinderForce_PullForce
+            strQuery = "select PartNumber,Description,PullForceMaximum from RodClevisDetails where "     '05_04_2010     RAGAVA
+            strQuery += "pinHoleSize=" & PinSize & " and pinHoleType='" & ofrmTieRod1.cmbRodClevisPinHole.SelectedItem & "'  and " & dblCylinderForce_PullForce & "<= pullforcemaximum and ThreadSize IN "  '<= " & RodDiameter.ToString      '20_04_2010   RAGAVA"
+            'ANUP 12-10-2010 START
+            strQuery += "(select rdd.RodThreadSize from RodDiameterDetails rdd,BoreDiameter_RodDiameter bdrd where bdrd.PartNumberId = rdd.PartNumber and bdrd.BoreDiameterID = (Select BoreDiameterID from BoreDiameterMaster where BoreDiameter = " & Val(ofrmTieRod1.cmbBore.SelectedItem) & ")and rdd.series = '" & IIf(Trim(SeriesForCosting.ToString).StartsWith("TX"), "TX", "TL/TH/TP/LN") & "' and IsASAE = '" & Trim(ofrmTieRod1.cmbStyle.SelectedItem) & "' and MaterialType = '" & Trim(ofrmTieRod1.cmbRodMaterial.SelectedItem) & "' and RodDiameter = " & RodDiameter
+            'ANUP 12-10-2010 TILL HERE
+
+            If Not SeriesForCosting.ToString.Contains("TX") Then
+                strQuery += " and pistonthreadSize= " + dblPistonThreadSize.ToString
+            End If
+            If Trim(ofrmTieRod1.cmbStyle.SelectedItem) = "ASAE" Then
+                strQuery += " And StrokeLength =" & Val(ofrmTieRod1.cmbStrokeLength.SelectedItem)
+            End If
+            strQuery += " ) "
+
+            Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+            If objDT.Rows.Count = 0 Then
+                If blnRevision = False Then
+                    MessageBox.Show("Rod Clevis is not available for the selected Configuration", "Information", MessageBoxButtons.OK)
+                End If
+                Me.rdbRodClevisNo.Checked = True
+                Me.rdbRodClevisYes.Enabled = False
+                Me.optPinsNo_Rod.Checked = True                   '13_04_2010   RAGAVA
+                Me.optPinsYes_Rod.Enabled = False                 '13_04_2010   RAGAVA
+            Else
+                Me.rdbRodClevisNo.Checked = False
+                Me.rdbRodClevisYes.Enabled = True
+                Me.rdbRodClevisYes.Checked = True
+                Me.optPinsNo_Rod.Checked = False                 '13_04_2010   RAGAVA
+                Me.optPinsYes_Rod.Enabled = True                 '13_04_2010   RAGAVA
+                Me.optPinsYes_Rod.Checked = True                 '13_04_2010   RAGAVA
+            End If
+            Try
+                Dim aColumns As New ArrayList
+                LVRodClevis.Columns.Clear()
+                aColumns.Add(New Object(2) {"Description", "Description", True})
+                aColumns.Add(New Object(2) {"PullForceMaximum", "Maximum" + vbNewLine + "Rated Pull Force", True})
+                LVRodClevis.DisplayHeaders = aColumns
+
+                Dim objDT1 As New DataTable
+                objDT1.Columns.Add("Description")
+                objDT1.Columns.Add("PullForceMaximum")
+                objDT1.Columns.Add("Cost")
+                For Each oDataRow As DataRow In objDT.Rows
+                    Dim oRow As DataRow = objDT1.NewRow()
+                    oRow("Description") = oDataRow("Description")
+                    oRow("PullForceMaximum") = oDataRow("PullForceMaximum")
+                    Dim dblCost As Double = IFLConnectionObject.GetValue("Select Cost from CostingDetails where PartCode = '" + oDataRow("PartNumber") + "'")
+                    oRow("Cost") = dblCost
+                    objDT1.Rows.Add(oRow)
+                Next
+
+
+                'Dim oTable As DataTable = objDT1
+
+                'oTable.Columns.Add("Cost")
+                LVRodClevis.FlushListViewData()
+                LVRodClevis.SourceTable = objDT1
+                LVRodClevis.Populate()
+                '09_10_2009
+                If objDT.Rows.Count = 1 Then
+                    LVRodClevis.Items(0).Selected = True
+                    LVRodClevis.Enabled = False
+                Else
+                    LVRodClevis.Enabled = True
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Private Sub LVPinSizeDetails_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LVPinSizeDetails.SelectedIndexChanged
+        Try
+            'cmbPinMaterial.Items.Clear()
+            cmbClips.Items.Clear()
+            cmbRodClevisPinClips.Items.Clear()
+            LVRodClevis.Clear()              '06_04_2010   RAGAVA
+            If LVPinSizeDetails.SelectedItems.Count > 0 Then
+                cmbPinMaterial.Items.Add(" ")
+                cmbClips.Items.Add(" ")
+                cmbRodClevisPinClips.Items.Add(" ")
+                Dim strQuery As String
+                Dim oListViewItem As ListViewItem
+                oListViewItem = LVPinSizeDetails.SelectedItems(0)
+                PinSize = Val(oListViewItem.SubItems(0).Text)
+                dblPinSize = PinSize       '10_09_2011   RAGAVA
+                PinHoleSize = PinSize
+                strQuery = ""
+                Dim arrSeries As String()
+                If SeriesForCosting.ToString.StartsWith("TP") Then
+                    arrSeries = SeriesForCosting.ToString.Split("-")
+                Else
+                    arrSeries = SeriesForCosting.ToString.Split(" ")
+                End If
+                Dim strSeries As String = arrSeries(0)
+                strQuery = "select * from ClevisCapDetails where BoreDiameter = " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " and " & GetClevisCapDetails() & " and port = '" & Trim(ofrmTieRod1.cmbClevisCapPort.SelectedItem) & "' and PinHoleSize = " & Val(oListViewItem.SubItems(0).Text) & " and PinHoleType = '" & Trim(ofrmTieRod1.cmbClevisCapPinHole.SelectedItem) & "'"
+
+                Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+                txtClevisCap.Text = objDT.Rows(0).Item("PartNumber").ToString
+
+                strClevisCapCodeNumber = objDT.Rows(0).Item("PartNumber").ToString
+                ClevisCapCodeNumber = strClevisCapCodeNumber           '12_10_2009   ragava
+                strClevisCapDrawingNumber = "N/A"
+                strClevisCapDescription = objDT.Rows(0).Item("Description").ToString
+
+                mdiMonarch.mdiComponent.Items(8).SubItems.Add(strClevisCapCodeNumber)
+                mdiMonarch.mdiComponent.Items(8).SubItems.Add(strClevisCapDrawingNumber)
+                mdiMonarch.mdiComponent.Items(8).SubItems.Add(strClevisCapDescription)
+                Try
+                    strQuery = "Select distinct PinMaterial  from ClevisPinDetails where PinHoleSize=" & Val(oListViewItem.SubItems(0).Text) & " And  " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " >= BoreDiameterMinimum and " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " < = BoreDiameterMaximum"
+                    Dim objDT1 As DataTable = oDataClass.GetDataTable(strQuery)
+                    ' cmbPinMaterial.Items.Clear()
+                    ' cmbPinMaterial.Items.Add(" ")
+                    '  If Not mdiMonarch.isGeneratedBtnClicked Then
+                    'For Each dr As DataRow In objDT1.Rows
+                    '    cmbPinMaterial.Items.Add(dr(0).ToString)
+                    'Next
+                    '09_10_2009
+                    If objDT1.Rows.Count = 1 Then
+                        cmbPinMaterial.SelectedIndex = 1
+                        cmbPinMaterial.Enabled = False
+                    Else
+                        If optPinsNo.Checked = False Then     ''27_10_2009   Ragava
+                            cmbPinMaterial.Enabled = True
+                            cmbPinMaterial.SelectedItem = "Standard"                   '11_11_2009   Ragava
+                        End If
+                    End If
+                    'Else
+                    'cmbPinMaterial.Text = Module1.ReadValuesFromExcel.PinMaterial.ToString()
+                    'End If
+
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+                If Not SeriesForCosting.ToString.StartsWith("TX") Then
+                    setWorkingPressure(ofrmTieRod1.dbltempWorkingPressureNut)
+                Else
+                    setWorkingPressure(ofrmTieRod1.dbltempWorkingPressureSeries)
+                End If
+                Try
+                    ofrmTieRod1.CheckRodEndThreadSizeLogics()
+                Catch ex As Exception
+
+                End Try
+                'Else
+                '    cmbPinMaterial.Items.Clear()
+            End If
+            WorkingPressure = Val(ofrmTieRod1.txtWorkingPressure.Text)
+            LoadInformation()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        '06_04_2010   RAGAVA
+        If optPinsNo_Rod.Checked = True AndAlso optPinsNo.Checked = True Then
+            cmbPinMaterial.SelectedIndex = -1
+            cmbPinMaterial.Enabled = False
+        End If
+        If optPinsNo_Rod.Checked = True Then
+            cmbRodClevisPinClips.SelectedIndex = -1
+            cmbRodClevisPinClips.Enabled = False
+        End If
+        If optPinsNo.Checked = True Then
+            'cmbPinMaterial.SelectedIndex = -1
+            'cmbPinMaterial.Enabled = False
+            cmbClips.SelectedIndex = -1
+            cmbClips.Enabled = False
+            'cmbRodClevisPinClips.SelectedIndex = -1
+            'cmbRodClevisPinClips.Enabled = False
+        End If
+        '06_04_2010   RAGAVA   Till   Here
+        For Each listviewItem As ListViewItem In LVPinSizeDetails.Items
+            Dim index As Integer = LVPinSizeDetails.Items.IndexOf(listviewItem)
+            LVPinSizeDetails.Items(index).BackColor = Color.Ivory
+            LVPinSizeDetails.Items(index).ForeColor = Color.Black
+        Next
+        For Each listviewItem As ListViewItem In LVPinSizeDetails.SelectedItems
+            Dim index As Integer = LVPinSizeDetails.Items.IndexOf(listviewItem)
+            LVPinSizeDetails.Items(index).BackColor = Color.CornflowerBlue
+            LVPinSizeDetails.Items(index).ForeColor = Color.White
+        Next
+        '06_04_2010   RAGAVA
+        If LVPinSizeDetails.SelectedItems.Count > 0 Then
+            LoadClevis()
+        End If
+        'Till  Here
+
+    End Sub
+
+    Private Sub setWorkingPressure(ByVal workingPressure As Double)
+        Dim oSelectedListviewItem As ListViewItem = LVPinSizeDetails.SelectedItems(0)
+        If oSelectedListviewItem.SubItems(2).Text <> "N/A" Then
+            'If Val(ofrmTieRod1.txtWorkingPressure.Text) > Val(oSelectedListviewItem.SubItems(2).Text) Then
+            If workingPressure > Val(oSelectedListviewItem.SubItems(2).Text) Then
+                ofrmTieRod1.txtWorkingPressure.Text = oSelectedListviewItem.SubItems(2).Text
+            End If
+        Else
+            '03_11_2009  Ragava
+            If Val(ofrmTieRod1.txtWorkingPressure.Text) > ofrmTieRod1.dbltempWorkingPressureSeries Then
+                ofrmTieRod1.txtWorkingPressure.Text = ofrmTieRod1.dbltempWorkingPressureSeries
+            End If
+            'ofrmTieRod1.txtWorkingPressure.Text = ofrmTieRod1.dbltempWorkingPressureSeries
+            '03_11_2009  Ragava  Till  Here
+        End If
+    End Sub
+
+    Private Sub optPinsNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optPinsNo.CheckedChanged, optPinsNo_Rod.CheckedChanged
+        If sender.checked Then
+            If optPinsNo_Rod.Checked = True AndAlso optPinsNo.Checked = True Then  '06_04_2010   RAGAVA
+                cmbPinMaterial.SelectedIndex = -1
+                cmbPinMaterial.Enabled = False
+            End If
+            If sender.Name = "optPinsNo" Then           '06_04_2010   RAGAVA
+                ClevisPins = False
+                cmbClips.SelectedIndex = -1
+                cmbClips.Enabled = False
+            ElseIf sender.Name = "optPinsNo_Rod" Then           '06_04_2010   RAGAVA
+                RodClevisPins = False
+                cmbRodClevisPinClips.SelectedIndex = -1
+                cmbRodClevisPinClips.Enabled = False
+            End If
+            blnPins = False       '11_11_2009   Ragava
+        Else
+            'cmbPinMaterial.Enabled = True
+            LVPinSizeDetails.Enabled = True
+            If optPinsYes.Checked = True Then           '06_04_2010   RAGAVA
+                cmbClips.Enabled = True
+            End If
+            If optPinsYes_Rod.Checked = True Then           '06_04_2010   RAGAVA
+                cmbRodClevisPinClips.Enabled = True
+            End If
+        End If
+        '06_04_2010   RAGAVA
+        If optPinsYes_Rod.Checked = True Or optPinsYes.Checked = True Then
+            cmbPinMaterial.Enabled = True
+        End If
+    End Sub
+
+    Private Sub cmbRodEndThread_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRodEndThread.SelectedIndexChanged
+        strNewTableDrawingNumber = strNewTubeTableDrawingNumber          '02_12_2009  RAGAVA
+        'LVRodClevis.Clear()                 '06_04_2010   RAGAVA   Commented
+        If Trim(sender.selectedItem) <> "" Then
+            dblRodThreadSize = Val(cmbRodEndThread.SelectedItem)
+            Try
+                'Dim strQuery As String
+                'strQuery = ""
+                'dblCylinderForce_PullForce = Val(ofrmTieRod1.txtWorkingPressure.Text) * (3.1416 / 4) * (Math.Pow(BoreDiameter, 2) - Math.Pow(IIf(RodDiameter = 1.12, 1.125, RodDiameter), 2))
+                'dblCylinderPullForce = dblCylinderForce_PullForce
+                'strQuery = "select Description,PullForceMaximum from RodClevisDetails where "     '05_04_2010     RAGAVA
+                'strQuery = strQuery + " pinHoleSize=" & PinSize & " and pinHoleType='" & ofrmTieRod1.cmbRodClevisPinHole.SelectedItem & "'  and " & dblCylinderForce_PullForce & "<= pullforcemaximum"
+                'Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+                'If objDT.Rows.Count = 0 Then
+                '    If blnRevision = False Then
+                '        MessageBox.Show("Rod Clevis is not available for the selected Configuration", "Information", MessageBoxButtons.OK)
+                '    End If
+                '    Me.rdbRodClevisNo.Checked = True
+                '    Me.rdbRodClevisYes.Enabled = False
+                'Else
+                '    Me.rdbRodClevisNo.Checked = False
+                '    Me.rdbRodClevisYes.Enabled = True
+                '    Me.rdbRodClevisYes.Checked = True
+                'End If
+                'Try
+                '    Dim aColumns As New ArrayList
+                '    LVRodClevis.Columns.Clear()
+                '    aColumns.Add(New Object(2) {"Description", "Description", True})
+                '    aColumns.Add(New Object(2) {"PullForceMaximum", "Maximum" + vbNewLine + "Rated Pull Force", True})
+                '    LVRodClevis.DisplayHeaders = aColumns
+                '    Dim oTable As DataTable = objDT
+                '    oTable.Columns.Add("Cost")
+                '    LVRodClevis.FlushListViewData()
+                '    LVRodClevis.SourceTable = objDT
+                '    LVRodClevis.Populate()
+                '    '09_10_2009
+                '    If objDT.Rows.Count = 1 Then
+                '        LVRodClevis.Items(0).Selected = True
+                '        LVRodClevis.Enabled = False
+                '    Else
+                '        LVRodClevis.Enabled = True
+                '    End If
+                'Catch ex As Exception
+                '    MsgBox(ex.Message)
+                'End Try
+                Dim strQuery As String
+                Try
+                    strQuery = "select * from RodClevisDetails where " 'ThreadSize=" & Val(cmbRodEndThread.SelectedItem) & vbNewLine        '05_04_2010   RAGAVA
+                    strQuery = strQuery + " pinHoleSize=" & PinSize & " and pinHoleType='" & ofrmTieRod1.cmbRodClevisPinHole.SelectedItem & "' " 'and " & dblCylinderForce & " >= pullforcemaximum"
+                    Dim objDT1 As DataTable = oDataClass.GetDataTable(strQuery)
+                    If objDT1.Rows.Count > 0 Then
+                        strRodClevisDrawingNumber = "N/A"
+                        strRodClevisCodeNumber = objDT1.Rows(0).Item("PartNumber").ToString
+                        strRodClevisDescription = objDT1.Rows(0).Item("Description").ToString
+                        mdiMonarch.mdiComponent.Items(9).SubItems.Add(strRodClevisCodeNumber)
+                        mdiMonarch.mdiComponent.Items(9).SubItems.Add(strRodClevisDrawingNumber)
+                        mdiMonarch.mdiComponent.Items(9).SubItems.Add(strRodClevisDescription)
+                    End If
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+            Try
+                Dim StrSql As String
+                Dim oListViewItem As ListViewItem                     '23_11_2009   Ragava
+                Dim dblPistonNutSize As Double              '19_02_2010    RAGAVA
+                If ofrmTieRod1.LVNutSizeDetails.SelectedItems.Count > 0 Then      '19_02_2010    RAGAVA
+                    oListViewItem = ofrmTieRod1.LVNutSizeDetails.SelectedItems(0)                     '23_11_2009   Ragava
+                    dblPistonNutSize = Val(oListViewItem.SubItems(0).Text)                     '23_11_2009   Ragava
+                End If
+                'ANUP 12-10-2010 START
+                If ofrmTieRod1.LVNutSizeDetails.SelectedItems.Count < 1 Then
+                    StrSql = "select rdd.DrawingPartNumber,rdd.PartNumber,rdd.Description,rdd.OverAllRodLength,rdd.StrokeLength from RodDiameterDetails rdd,BoreDiameter_RodDiameter bdrd where bdrd.PartNumberId = rdd.PartNumber and bdrd.BoreDiameterID = (Select BoreDiameterID from BoreDiameterMaster where BoreDiameter = " _
+                    & Val(ofrmTieRod1.cmbBore.SelectedItem) & ")and rdd.series = '" & IIf(Trim(SeriesForCosting.ToString).StartsWith("TX"), "TX", "TL/TH/TP/LN") & "' and IsASAE = '" & Trim(ofrmTieRod1.cmbStyle.SelectedItem) & "' and MaterialType = '" & Trim(ofrmTieRod1.cmbRodMaterial.SelectedItem) & "' and RodDiameter = " & RodDiameter & " and RodThreadSize = " & Val(ofrmTieRod2.cmbRodEndThread.SelectedItem) '02_12_2009   Ragava
+                Else
+                    StrSql = "select rdd.DrawingPartNumber,rdd.PartNumber,rdd.Description,rdd.OverAllRodLength,rdd.StrokeLength from RodDiameterDetails rdd,BoreDiameter_RodDiameter bdrd where bdrd.PartNumberId = rdd.PartNumber and bdrd.BoreDiameterID = (Select BoreDiameterID from BoreDiameterMaster where BoreDiameter = " & Val(ofrmTieRod1.cmbBore.SelectedItem) & ")and rdd.series = '" & IIf(Trim(SeriesForCosting.ToString).StartsWith("TX"), "TX", "TL/TH/TP/LN") & "' and IsASAE = '" & Trim(ofrmTieRod1.cmbStyle.SelectedItem) & "' and MaterialType = '" & Trim(ofrmTieRod1.cmbRodMaterial.SelectedItem) & "' and RodDiameter = " & RodDiameter & " and RodThreadSize = " & Val(ofrmTieRod2.cmbRodEndThread.SelectedItem) & " And pistonthreadSize= " & dblPistonNutSize  '02_12_2009   Ragava
+                End If
+                'ANUP 12-10-2010 TILL HERE
+                If Trim(ofrmTieRod1.cmbStyle.SelectedItem) = "ASAE" Then
+                    StrSql = StrSql + " And StrokeLength =" & Val(ofrmTieRod1.cmbStrokeLength.SelectedItem)
+                Else
+                    '02_12_2009  ragava
+                    'StrSql = StrSql + " And StrokeLength =" & Val(ofrmTieRod1.txtStrokeLength.Text)             '23_11_2009    Ragava
+                    Try
+                        Dim objDT_temp As DataTable = oDataClass.GetDataTable(StrSql)
+                        If objDT_temp.Rows.Count > 0 Then
+                            RodStrokeDifference = Math.Round(Val(objDT_temp.Rows(0).Item("OverAllRodLength").ToString) - Val(objDT_temp.Rows(0).Item("StrokeLength").ToString), 2)
+                        End If
+                    Catch ex As Exception
+                    End Try
+                    Dim dblRodLength As Double = StrokeLength + RodStrokeDifference + StopTubeLength + RodAdder
+                    StrSql = StrSql + " And OverAllRodLength =" & dblRodLength.ToString
+                    '02_12_2009  ragava  Till  Here
+                End If
+                Dim objDT As DataTable = oDataClass.GetDataTable(StrSql)
+                If objDT.Rows.Count > 0 Then
+                    strRodDrawingNumber = objDT.Rows(0).Item("DrawingPartNumber").ToString
+                    strRodCodeNumber = objDT.Rows(0).Item("PartNumber").ToString
+                    strRodDescription = objDT.Rows(0).Item("Description").ToString
+                    mdiMonarch.mdiComponent.Items(1).SubItems.Add(" ")
+                    mdiMonarch.mdiComponent.Items(1).SubItems.Add(strRodDrawingNumber)
+                    mdiMonarch.mdiComponent.Items(1).SubItems.Add(strRodDescription)
+                    '02_12_2009   ragava
+                Else
+                    Dim strQuery As String = "Select CodeNumber from CodeNumberDetails where Type = 'ROD'"
+                    Dim objDT3 As DataTable = oDataClass.GetDataTable(strQuery)
+                    If strNewTableDrawingNumber <> "" Then
+                        strNewTableDrawingNumber = (Val(strNewTableDrawingNumber) + 1).ToString
+                    Else
+                        strNewTableDrawingNumber = objDT3.Rows(0).Item("CodeNumber").ToString
+                    End If
+                    strRodCodeNumber = strNewTableDrawingNumber
+                    '02_12_2009   ragava  Till  Here
+                End If
+                'End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            LoadInformation()
+        End If
+    End Sub
+    Public Sub ActivatedCodeTieRod2()
+        If optPinsNo.Checked = False AndAlso optPinsYes.Checked = False Then
+            optPinsYes.Checked = True            '19_04_2010   RAGAVA
+        End If
+        If optPinsNo_Rod.Checked = False AndAlso optPinsYes_Rod.Checked = False Then
+            optPinsYes_Rod.Checked = True            '20_04_2010   RAGAVA
+        End If
+        txtColumnLoad.Text = ColumnLoad
+        txtWorkingPressure.Text = WorkingPressure
+        LoadInformation()
+        CustomerName = Trim(ofrmContractDetails.cmbCustomerName.SelectedItem)   '22_02_2010    Ragava
+        AssemblyType = ofrmContractDetails.cmbAssemblyType.SelectedItem
+        PartCode1 = ofrmContractDetails.txtlPartCode.Text
+        If cmbThreadProtected.SelectedIndex = -1 Then
+            cmbThreadProtected.SelectedItem = "Standard"                   '11_11_2009   Ragava
+        End If
+        'Try
+        '    Dim strQuery As String
+        '    If Trim(cmbPaint.SelectedItem) = "" And cmbPaint.Items.Count < 1 Then
+        '        cmbPaint.Items.Clear()
+        '        cmbPaint.Items.Add(" ")
+        '        strQuery = ""
+        '        strQuery = "select Distinct Color from TieRodPaintDetails"
+        '        Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+        '        For Each dr As DataRow In objDT.Rows
+        '            cmbPaint.Items.Add(dr(0).ToString)
+        '        Next
+        '        '09_10_2009
+        '        If objDT.Rows.Count = 1 Then
+        '            cmbPaint.Items(0).Selected = True
+        '            cmbPaint.Enabled = False
+        '        Else
+        '            cmbPaint.Enabled = True
+        '        End If
+        '    End If
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
+
+    End Sub
+
+    Private Sub cmbClips_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbClips.SelectedIndexChanged
+        If Trim(sender.selectedItem) <> "" Then
+            Try
+                Dim oListViewItem As ListViewItem
+                If LVPinSizeDetails.SelectedItems.Count > 0 Then
+                    oListViewItem = LVPinSizeDetails.SelectedItems(0)
+                    Dim strQuery As String
+                    Dim objDT As DataTable
+                    strQuery = ""
+                    strQuery = "select *  from ClevisPinDetails where PinHoleSize = " & Val(oListViewItem.SubItems(0).Text) & " and PinMaterial = '" & Trim(cmbPinMaterial.SelectedItem) & "' And  " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " >= BoreDiameterMinimum and " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " < = BoreDiameterMaximum  and PinType = '" + cmbClips.Text + "'"
+                    objDT = oDataClass.GetDataTable(strQuery)
+                    strPinsCodeNumber = objDT.Rows(0).Item("PartNumber").ToString
+                    strPinsDrawingNumber = "N/A"
+                    strPinsDescription = "N/A"
+                    strClevisCapPinCodeNumber = strPinsCodeNumber ' Todo:Sandeep 04-04-10
+                    mdiMonarch.mdiComponent.Items(4).SubItems.Add(strPinsCodeNumber)
+                    mdiMonarch.mdiComponent.Items(4).SubItems.Add(strPinsDrawingNumber)
+                    mdiMonarch.mdiComponent.Items(4).SubItems.Add(strPinsDescription)
+                End If
+                If optPinsYes_Rod.Checked = True Then         '07_04_2010    RAGAVA
+                    cmbRodClevisPinClips.SelectedItem = Trim(cmbClips.SelectedItem)      '11_11_2009  Ragava
+                ElseIf optPinsNo_Rod.Checked = True Then      '07_04_2010    RAGAVA
+                    cmbRodClevisPinClips.SelectedIndex = -1   '07_04_2010    RAGAVA
+                End If
+                ClevisPinClips = Trim(cmbClips.SelectedItem)   '11_11_2009  Ragava
+                _strPinCodeBE = strPinsCodeNumber.ToString.Substring(0, 6)          '16_06_2011   RAGAVA
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            LoadInformation()
+        End If
+    End Sub
+
+    Private Sub cmbPistonSealPackage_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPistonSealPackage.SelectedIndexChanged
+        If cmbPistonSealPackage.SelectedItem <> "" Then
+            strPistonSealPackage = Trim(cmbPistonSealPackage.SelectedItem)
+            Try
+                Dim oListViewItem As ListViewItem
+                Dim strColumns() As String
+                strColumns = (cmbPistonSealPackage.SelectedItem).Split("+")
+                Dim StrSql As String = ""
+                Dim arrSeries As String()
+                arrSeries = SeriesForCosting.ToString.Split(" ")
+                Dim strSeries As String = arrSeries(0)
+                If SeriesForCosting.ToString.StartsWith("TX") = False Then
+                    If ofrmTieRod1.LVNutSizeDetails.SelectedItems.Count > 0 Then
+                        oListViewItem = ofrmTieRod1.LVNutSizeDetails.SelectedItems(0)
+                        StrSql = "select * from PistonSealDetails where BoreDiameter = " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " and PistonNutSize = " & Val(oListViewItem.SubItems(0).Text) & " and Series like '%" & strSeries & "%'"
+                    End If
+                Else
+                    StrSql = "select * from PistonSealDetails where BoreDiameter = " & Val(ofrmTieRod1.cmbBore.SelectedItem) & " and Series like '%" & strSeries & "%'" '" and PistonNutSize = " & Val(oListViewItem.SubItems(0).Text)
+                End If
+                If Trim(StrSql) <> "" Then
+                    For Each strCol As String In strColumns
+                        StrSql = StrSql & " and " & Trim(strCol) & " <> ''"
+                    Next
+                    Dim objDT As DataTable = oDataClass.GetDataTable(StrSql)
+                    If objDT.Rows.Count > 0 Then
+                        strPistonCodeNumber = objDT.Rows(0).Item("PartNumber").ToString
+                        strPistonDrawingNumber = "N/A"
+                        strPistonDescription = objDT.Rows(0).Item("PistonDescription").ToString
+                        mdiMonarch.mdiComponent.Items(2).SubItems.Add(strPistonCodeNumber)
+                        mdiMonarch.mdiComponent.Items(2).SubItems.Add(strPistonDrawingNumber)
+                        mdiMonarch.mdiComponent.Items(2).SubItems.Add(strPistonDescription)
+                    End If
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            LoadInformation()
+        End If
+    End Sub
+
+    Private Sub rdbRodClevisYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbRodClevisYes.CheckedChanged
+        If sender.checked Then
+            rdbRodClevis = True        '19_02_2010     RAGAVA
+            CaluculateLength(True)
+            ofrmTieRod1.txtRetractedLength.Enabled = True
+        End If
+    End Sub
+
+    Private Sub frmTieRod2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        '02_11_2009   Ragava 
+        'rdbRodClevisNo.Enabled = True
+        'rdbRodClevisYes.Checked = True
+        '02_11_2009   Ragava  Till  Here
+
+
+        'Try
+        '    Dim strQuery As String
+        '    cmbPaint.Items.Clear()
+        '    cmbPaint.Items.Add(" ")
+        '    strQuery = ""
+        '    strQuery = "select Distinct Color from TieRodPaintDetails"
+        '    Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+        '    For Each dr As DataRow In objDT.Rows
+        '        cmbPaint.Items.Add(dr(0).ToString)
+        '    Next
+        '    '09_10_2009
+        '    If objDT.Rows.Count = 1 Then
+        '        cmbPaint.Items(0).Selected = True
+        '        cmbPaint.Enabled = False
+        '    Else
+        '        cmbPaint.Enabled = True
+        '    End If
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
+        ofrmContractDetails.lVLogInformation.Items.Clear()
+
+        ColorTheForm()
+        'loadingdataFromExcelTieRod2()
+    End Sub
+
+    Private Sub rdbRodClevisNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbRodClevisNo.CheckedChanged
+        If sender.checked Then
+            rdbRodClevis = False        '19_02_2010     RAGAVA
+            'cmbRodClevis.SelectedIndex = -1
+            'cmbRodClevis.Enabled = False
+            CaluculateLength(False)
+            ofrmTieRod1.txtRetractedLength.Enabled = True
+            cmbRodClevisPinClips.SelectedIndex = -1
+            cmbRodClevisPinClips.Enabled = False
+            LVRodClevis.Enabled = False
+            'strRodClevisCodeNumber = ""
+            'strRodClevisDrawingNumber = ""
+            'strRodClevisDescription = ""
+            'mdiMonarch.mdiComponent.Items(9).SubItems.Add(strRodClevisCodeNumber)
+            'mdiMonarch.mdiComponent.Items(9).SubItems.Add(strRodClevisDrawingNumber)
+            'mdiMonarch.mdiComponent.Items(9).SubItems.Add(strRodClevisDescription)
+        Else
+            If optPinsNo.Checked = True Then
+                cmbRodClevisPinClips.SelectedIndex = -1
+                cmbRodClevisPinClips.Enabled = False
+            Else
+                cmbRodClevisPinClips.Enabled = True
+            End If
+            LVRodClevis.Enabled = True
+        End If
+        ' LoadInformation()
+    End Sub
+
+    Private Sub LVRodClevis_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LVRodClevis.SelectedIndexChanged
+
+        ''05_04_2010    RAGAVA
+        'Try
+        '    If LVRodClevis.SelectedItems.Count > 0 Then
+        '        Dim oListViewItem As ListViewItem
+        '        oListViewItem = LVRodClevis.SelectedItems(0)
+        '        Dim strQuery As String = String.Empty
+        '        strQuery = "select ThreadSize from RodClevisDetails where  Description ='" & Trim(oListViewItem.SubItems(0).Text) & "' And PullForceMaximum > = " & Val(oListViewItem.SubItems(1).Text)
+        '        Dim objDT1 As DataTable = oDataClass.GetDataTable(strQuery)
+        '        If objDT1.Rows.Count > 0 Then
+        '            cmbRodEndThread.Items.Clear()
+        '            For Each dr As DataRow In objDT1.Rows
+        '                cmbRodEndThread.Items.Add(dr(0).ToString)
+        '            Next
+        '            cmbRodEndThread.SelectedIndex = 0
+        '        End If
+        '    End If
+        'Catch ex As Exception
+        'End Try
+        ''05_04_2010    RAGAVA    Till   Here
+
+
+        Try
+            If LVRodClevis.SelectedItems.Count > 0 Then
+                Dim strQuery As String
+                Dim oListViewItem As ListViewItem
+                oListViewItem = LVRodClevis.SelectedItems(0)
+
+
+                '05_04_2010    RAGAVA
+                strQuery = "select ThreadSize from RodClevisDetails where  Description ='" & Trim(oListViewItem.SubItems(0).Text) & "' And PullForceMaximum > = " & Val(oListViewItem.SubItems(1).Text)
+                Dim objDT1 As DataTable = oDataClass.GetDataTable(strQuery)
+                If objDT1.Rows.Count > 0 Then
+                    For Each dr As DataRow In objDT1.Rows
+                        cmbRodEndThread.Items.Add(dr(0).ToString)
+                        cmbRodEndThread.SelectedItem = dr(0).ToString
+                    Next
+                End If
+                '05_04_2010    RAGAVA    Till   Here
+
+
+
+
+
+                '  oListViewItem = LVRodClevis.Items(LVRodClevis.GetCurrentIndex)
+                strQuery = ""
+                strQuery = "select * from RodClevisDetails where  Description ='" & Trim(oListViewItem.SubItems(0).Text) & "' And PullForceMaximum > = " & Val(oListViewItem.SubItems(1).Text)
+                Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+                For Each dr As DataRow In objDT.Rows
+                    strRodClevisCodeNumber = objDT.Rows(0).Item("PartNumber").ToString
+                    strRodClevisDrawingNumber = "N/A"
+                    strRodClevisDescription = objDT.Rows(0).Item("Description").ToString
+                    mdiMonarch.mdiComponent.Items(9).SubItems.Add(strRodClevisCodeNumber)
+                    mdiMonarch.mdiComponent.Items(9).SubItems.Add(strRodClevisDrawingNumber)
+                    mdiMonarch.mdiComponent.Items(9).SubItems.Add(strRodClevisDescription)
+                    'cmbRodClevis.Items.Clear()
+                    'cmbRodClevis.Items.Add(" ")
+                    'cmbRodClevis.Items.Add(strRodClevisCodeNumber)
+                    'cmbRodClevis.SelectedItem = strRodClevisCodeNumber
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        Try
+            If LVRodClevis.SelectedItems.Count > 0 Then
+                Dim strQuery As String
+                Dim oListViewItem As ListViewItem
+                oListViewItem = LVRodClevis.SelectedItems(0)
+                ' oListViewItem = LVRodClevis.Items(LVRodClevis.GetCurrentIndex)
+                strQuery = ""
+
+                strQuery = "select * from RodClevisDetails where  Description ='" & Trim(oListViewItem.SubItems(0).Text) & "' And PullForceMaximum = " & Val(oListViewItem.SubItems(1).Text)
+                Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+                If objDT.Rows.Count > 0 Then
+                    strRodClevisCodeNumber = objDT.Rows(0).Item("PartNumber").ToString
+                End If
+                strQuery = ""
+                cmbRodClevisPinClips.Items.Clear()
+
+                '11_11_2009  Ragava
+                'strQuery = "select distinct  HairClip,CotterPin,R_Pin,RetainingRing from RodClevisPinDetails where   PartNumber = '" & strRodClevisCodeNumber & " ' And IsStandard =" & IIf(cmbPinMaterial.SelectedItem = "Standard", 1, 0)
+                strQuery = "select distinct  [Hair pins],[Cotter Pins],[R - Style Pins],[Retaining rings] from RodClevisPinDetails where   PartNumber = '" & strRodClevisCodeNumber & " ' And IsStandard =" & IIf(cmbPinMaterial.SelectedItem = "Standard", 1, 0)
+                '11_11_2009  Ragava   Till  Here
+
+                Dim objDT1 As DataTable = oDataClass.GetDataTable(strQuery)
+                cmbRodClevisPinClips.Items.Add(" ")
+                For Each dr As DataRow In objDT1.Rows
+                    Dim strRow As String = ""
+                    If Trim(dr(0).ToString) <> "" Then
+                        strRow = objDT1.Columns.Item(0).ToString
+                        cmbRodClevisPinClips.Items.Add(strRow)
+                    End If
+                    If Trim(dr(1).ToString) <> "" Then
+                        strRow = objDT1.Columns.Item(1).ToString
+                        cmbRodClevisPinClips.Items.Add(strRow)
+                    End If
+                    If Trim(dr(2).ToString) <> "" Then
+                        strRow = objDT1.Columns.Item(2).ToString
+                        cmbRodClevisPinClips.Items.Add(strRow)
+                    End If
+                    If Trim(dr(3).ToString) <> "" Then
+                        strRow = objDT1.Columns.Item(3).ToString
+                        cmbRodClevisPinClips.Items.Add(strRow)
+                    End If
+                Next
+                '09_10_2009
+                If optPinsNo.Checked = False Then
+                    If cmbRodClevisPinClips.Items.Count = 2 Then
+                        cmbRodClevisPinClips.SelectedIndex = 1
+                        cmbRodClevisPinClips.Enabled = False
+
+                    Else
+                        If optPinsYes_Rod.Checked = True Then          '06_04_2010    RAGAVA
+                            cmbRodClevisPinClips.Enabled = True
+                            'cmbRodClevisPinClips.SelectedItem = "Cotter Pins"      '11_11_2009  Ragava
+                            cmbRodClevisPinClips.SelectedItem = Trim(cmbClips.SelectedItem)      '11_11_2009  Ragava
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        LoadInformation()
+        For Each listviewItem As ListViewItem In LVRodClevis.Items
+            Dim index As Integer = LVRodClevis.Items.IndexOf(listviewItem)
+            LVRodClevis.Items(index).BackColor = Color.Ivory
+            LVRodClevis.Items(index).ForeColor = Color.Black
+        Next
+        For Each listviewItem As ListViewItem In LVRodClevis.SelectedItems
+            Dim index As Integer = LVRodClevis.Items.IndexOf(listviewItem)
+            LVRodClevis.Items(index).BackColor = Color.CornflowerBlue
+            LVRodClevis.Items(index).ForeColor = Color.White
+        Next
+    End Sub
+
+    Private Sub CmbRodClevisPinClips_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRodClevisPinClips.SelectedIndexChanged
+        Try
+            If Trim(sender.SelectedItem) <> "" Then
+                Dim strQuery As String = ""
+                '11_11_2009  Ragava
+                'strQuery = "Select " & sender.selectedItem.ToString & " from RodClevisPinDetails  where PartNumber = '" & strRodClevisCodeNumber & " ' and IsStandard=" & IIf(cmbPinMaterial.SelectedItem = "Standard", 1, 0)
+                strQuery = "Select [" & sender.selectedItem.ToString & "] from RodClevisPinDetails  where PartNumber = '" & strRodClevisCodeNumber & " ' and IsStandard=" & IIf(cmbPinMaterial.SelectedItem = "Standard", 1, 0)
+                '11_11_2009  Ragava   Till  Here
+                Dim objDT As DataTable = oDataClass.GetDataTable(strQuery)
+                If objDT.Rows.Count > 0 Then
+                    strRodClevisPinCodeNumber = objDT.Rows(0).Item(sender.selectedItem.ToString).ToString
+                End If
+                RodPinClips = Trim(cmbRodClevisPinClips.SelectedItem)   '11_11_2009  Ragava
+
+                _strPinCodeRE = strRodClevisPinCodeNumber.Substring(0, 6)          '16_06_2011   RAGAVA
+
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        LoadInformation()
+    End Sub
+
+    Private Sub optPinsYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optPinsYes.CheckedChanged
+        If sender.checked = True Then
+            '06_04_2010    RAGAVA
+            'If rdbRodClevisNo.Checked = True Then
+            '    cmbRodClevisPinClips.SelectedIndex = -1
+            '    cmbRodClevisPinClips.Enabled = False
+            'Else
+            '    cmbRodClevisPinClips.Enabled = True
+            'End If
+            cmbPinMaterial.Enabled = True
+            cmbClips.Enabled = True
+            '06_04_2010    RAGAVA   Till   Here
+            ClevisPins = True        '06_04_2010   RAGAVA
+            blnPins = True       '11_11_2009   Ragava
+        End If
+    End Sub
+    '06_04_2010    RAGAVA
+    Private Sub optPinsYes_Rod_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optPinsYes_Rod.CheckedChanged
+        If sender.Checked = True Then
+            RodClevisPins = True        '06_04_2010   RAGAVA
+            cmbPinMaterial.Enabled = True          '06_04_2010    RAGAVA
+        End If
+    End Sub
+
+
+    Private Sub cmbThreadProtected_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbThreadProtected.SelectedIndexChanged
+        If cmbThreadProtected.Text <> "" Then
+            ThreadProtected = cmbThreadProtected.Text
+        End If
+    End Sub
+
+    Private Sub txtTieRodSize_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTieRodSize.TextChanged
+        If Not txtTieRodSize.Text = "" Then
+            TieRodSize = txtTieRodSize.Text
+        End If
+    End Sub
+
+    Private Sub ColorTheForm()
+        FunctionalClassObject.LabelGradient_GreenBorder_ColoringTheScreens(LabelGradient3, LabelGradient1, LabelGradient4, LabelGradient9)
+        FunctionalClassObject.LabelGradient_OrangeBorder_ColoringTheScreens(LabelGradient5)
+        FunctionalClassObject.subLabelGradient_Child_ColoringScreens(LabelGradient2)
+        FunctionalClassObject.subLabelGradient_Child_ColoringScreens(LabelGradient6)
+        FunctionalClassObject.subLabelGradient_Child_ColoringScreens(LabelGradient8)
+        FunctionalClassObject.subLabelGradient_Child_ColoringScreens(LabelGradient7)
+        FunctionalClassObject.subLabelGradient_Child_ColoringScreens(LabelGradient20)
+    End Sub
+
+    Public Sub LoadingDataFromExcelTieRod2()               'SUGANDHI
+
+        If Module1.ReadValuesFromExcel.ClevisCapPins Then
+            optPinsYes.Checked = True
+        Else
+            optPinsNo.Checked = True
+        End If
+
+        If Module1.ReadValuesFromExcel.RodClevisPins Then
+            optPinsYes_Rod.Checked = True
+        Else
+            optPinsNo_Rod.Checked = True
+        End If
+
+        LVPinSizeDetails.Items(0).Selected = True
+
+        If optPinsNo.Checked = False Then
+            If cmbPinMaterial.Enabled = True Then
+                If Module1.ReadValuesFromExcel.PinMaterial = "Standard" Then
+                    cmbPinMaterial.SelectedItem = "Standard"
+                Else
+                    cmbPinMaterial.SelectedItem = "Hardend"
+                End If
+            End If
+        End If
+
+        If cmbClips.Enabled = True Then
+            cmbClips.Text = Module1.ReadValuesFromExcel.ClevisCapPinClips
+        End If
+
+        cmbThreadProtected.Text = Module1.ReadValuesFromExcel.ThreadProtected
+
+        If cmbRodSealPackage.Enabled = True Then
+            cmbRodSealPackage.SelectedIndex = 1
+        End If
+
+        If cmbRodSealPackage.Enabled = True Then
+            cmbRodSealPackage.SelectedIndex = 1
+        End If
+
+        If Module1.ReadValuesFromExcel.RodClevisCheck Then
+            rdbRodClevisYes.Checked = True
+        Else
+            rdbRodClevisYes.Checked = False
+        End If
+
+        LVRodClevis.Items(0).Selected = True
+
+        If cmbRodEndThread.Text = "" Then
+            Dim boolRodEndThreadSize As Boolean = False
+            For i As Integer = 0 To cmbRodEndThread.Items.Count - 1
+                If cmbRodEndThread.Items(i) = Module1.ReadValuesFromExcel.RodEndThreadSize.ToString() Then
+                    cmbRodEndThread.Text = Module1.ReadValuesFromExcel.RodEndThreadSize
+                    boolRodEndThreadSize = True
+                    Exit For
+                End If
+            Next
+            If Not boolRodEndThreadSize Then
+                IsErrorMessageTierod2 = True
+                Dim str As String = ""
+                For i As Integer = 0 To cmbRodEndThread.Items.Count - 1
+                    If i = cmbRodEndThread.Items.Count - 1 Then
+                        str = str + cmbRodEndThread.Items(i)
+                    Else
+                        str = str + cmbRodEndThread.Items(i) + ", "
+                    End If
+                Next
+                Module1.LogInfo.Add("RodEndThreadSize : Select the RodEndThreadSize value from the following " + "' " + str + " '")
+                ' MessageBox.Show("Please enter correct value")
+            End If
+        End If
+
+        If cmbRodClevisPinClips.Enabled = True Then
+            cmbRodClevisPinClips.Text = Module1.ReadValuesFromExcel.RodClevisPinClips
+        End If
+
+        If cmbPistonSealPackage.Enabled = True Then
+
+            Dim boolPistonSealPackage As Boolean = False
+            For i As Integer = 0 To cmbPistonSealPackage.Items.Count - 1
+                If cmbPistonSealPackage.Items(i) = Module1.ReadValuesFromExcel.PistonStealPackage.ToString() Then
+                    cmbPistonSealPackage.Text = Module1.ReadValuesFromExcel.PistonStealPackage.ToString()
+                    boolPistonSealPackage = True
+                    Exit For
+                End If
+            Next
+            If Not boolPistonSealPackage Then
+                IsErrorMessageTierod2 = True
+                'MessageBox.Show("Please enter correct value")
+                IsErrorMessageTierod2 = True
+                Dim str As String = ""
+                For i As Integer = 0 To cmbRodEndThread.Items.Count - 1
+                    If i = cmbRodEndThread.Items.Count - 1 Then
+                        str = str + cmbRodEndThread.Items(i)
+                    Else
+                        str = str + cmbRodEndThread.Items(i) + ", "
+                    End If
+                Next
+                Module1.LogInfo.Add("PistonSealPackage : Select the PistonSealPackage value from the following " + "' " + str + " '")
+                'cmbPistonSealPackage.SelectedIndex = 1
+            End If
+        End If
+
+        If IsErrorMessageTierod2 Then
+
+            ofrmContractDetails.ErrorMessages()
+            ' mdiMonarch.ShowFrmContactDetails()
+            Exit Sub
+
+        End If
+
+        cmbPaint.Text = Module1.ReadValuesFromExcel.Paint
+    End Sub
+
+   
+
+End Class

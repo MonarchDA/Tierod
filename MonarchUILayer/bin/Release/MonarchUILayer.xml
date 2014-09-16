@@ -1,0 +1,52 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MonarchUILayer
+</name>
+</assembly>
+<members>
+<member name="M:MonarchUILayer.BBLFunctionalModule.GetDataToSave(System.Object)">
+	<summary>
+	</summary>
+	<param name="oSaveButton"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchUILayer.BBLFunctionalModule.GetSaveFormList(Microsoft.Office.Interop.Excel.Button,System.Collections.ArrayList)">
+	<summary>
+	</summary>
+	<param name="oSaveButton"></param>
+	<param name="aSaveFormList"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchUILayer.BBLFunctionalModule.GetByteArray(System.Data.DataSet)">
+	<summary>
+ Gets the byte array data.
+ </summary>
+	<param name="oDataSet"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:MonarchUILayer.clsimgcapture.CaptureScreen">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="T:MonarchUILayer.clsimgcapture">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="P:MonarchUILayer.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MonarchUILayer.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MonarchUILayer.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

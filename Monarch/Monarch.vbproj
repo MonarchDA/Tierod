@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0C22AEE0-7A13-43AA-A517-F3880B911F68}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Monarch.My.MyApplication</StartupObject>
+    <RootNamespace>Monarch</RootNamespace>
+    <AssemblyName>CYDAv1.2Beta</AssemblyName>
+    <MyType>WindowsForms</MyType>
+    <ApplicationIcon>idola.ico</ApplicationIcon>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>http://localhost/CYDAv1.2Beta/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CYDAv1.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CYDAv1.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CollapsiblePanel, Version=1.0.3527.24506, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CollapsiblePanel.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelModule, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ExcelModule.dll</HintPath>
+    </Reference>
+    <Reference Include="IFLBaseDataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\IFLBaseDataLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="IFLBusinessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\IFLBusinessLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="IFLCommonLayer, Version=1.0.3460.26616, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\IFLCommonLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="IFLCustomUILayer, Version=1.0.3454.18668, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\IFLCustomUILayer.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Office, Version=2.1.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\Interop.Office.dll</HintPath>
+    </Reference>
+    <Reference Include="LabelGradient, Version=1.0.1062.37025, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LabelGradient.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Documents and Settings\sugandhi.ch\Desktop\SDGT\SDGT\bin\Debug\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Dll\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clsCMSIntegration.vb" />
+    <Compile Include="clsCMS_METHDM.vb" />
+    <Compile Include="clsCMS_METHDR.vb" />
+    <Compile Include="clsCMS_MTHL.vb" />
+    <Compile Include="clsCMS_STKA.vb" />
+    <Compile Include="clsCMS_STKMM_STKMP.vb" />
+    <Compile Include="clsCosting.vb" />
+    <Compile Include="clsCostingAnsCMSCommon.vb" />
+    <Compile Include="clsReleaseCylinderFunctionality.vb" />
+    <Compile Include="CNC Code\clsCNCUtil.vb" />
+    <Compile Include="CNC Code\CYL_Rod.vb" />
+    <Compile Include="CNC Code\CYL_RodService.vb" />
+    <Compile Include="CNC Code\StringConstants.vb" />
+    <Compile Include="CNC Code\ThreadingSpeeds.vb" />
+    <Compile Include="ExcelUtil\CNCDataBaseClass.vb" />
+    <Compile Include="ExcelUtil\CVSFileUtil.vb" />
+    <Compile Include="ExcelUtil\ExcelUtil.vb" />
+    <Compile Include="ExcelUtil\ReadExcel.vb" />
+    <Compile Include="frmRevisionTable.Designer.vb">
+      <DependentUpon>frmRevisionTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRevisionTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MILFunctionalModule.vb" />
+    <Compile Include="clsimgcapture.vb" />
+    <Compile Include="frmContractDetails.designer.vb">
+      <DependentUpon>frmContractDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmContractDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMonarch.designer.vb">
+      <DependentUpon>frmMonarch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMonarch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTieRod2.Designer.vb">
+      <DependentUpon>frmTieRod2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTieRod2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTieRod3.Designer.vb">
+      <DependentUpon>frmTieRod3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTieRod3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralModule.vb" />
+    <Compile Include="mdiMonarch.designer.vb">
+      <DependentUpon>mdiMonarch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mdiMonarch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module1.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ReadValuesFromExcel.vb" />
+    <Compile Include="TieRod1.Designer.vb">
+      <DependentUpon>TieRod1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TieRod1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmContractDetails.resx">
+      <DependentUpon>frmContractDetails.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMonarch.resx">
+      <DependentUpon>frmMonarch.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRevisionTable.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmRevisionTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTieRod2.resx">
+      <DependentUpon>frmTieRod2.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTieRod3.resx">
+      <DependentUpon>frmTieRod3.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mdiMonarch.resx">
+      <DependentUpon>mdiMonarch.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TieRod1.resx">
+      <DependentUpon>TieRod1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Office">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="Scripting">
+      <Guid>{420B2830-E718-11CF-893D-00A0C9054228}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MILLogo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="idola.ico" />
+    <Content Include="Monarch.exe.log4net.txt" />
+    <Content Include="Resources\Images\Generate1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonarchAPILayer\MonarchAPILayer.vbproj">
+      <Project>{1BA3926B-FDD8-4EF9-8F5E-F77B3773FA3F}</Project>
+      <Name>MonarchAPILayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonarchDatabaseLayer\MonarchDatabaseLayer.vbproj">
+      <Project>{B96AE62B-1C34-4B31-AB25-16FF2F37F489}</Project>
+      <Name>MonarchDatabaseLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonarchFunctionalLayer\MonarchFunctionalLayer.vbproj">
+      <Project>{E9D46D27-D617-4093-9C47-611908816C74}</Project>
+      <Name>MonarchFunctionalLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonarchSolidworksLayer\MonarchSolidworksLayer.vbproj">
+      <Project>{E5890109-A48F-4056-A977-C1BA94AF62D4}</Project>
+      <Name>MonarchSolidworksLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

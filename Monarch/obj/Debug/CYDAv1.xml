@@ -1,0 +1,114 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CYDAv1.2Beta
+</name>
+</assembly>
+<members>
+<member name="T:Monarch.ReadExcel">
+	<summary>
+ Reads the HookUP information from the given Excel
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Monarch.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Monarch.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Monarch.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:Monarch.clsimgcapture.CaptureScreen">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="T:Monarch.clsimgcapture">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="M:Monarch.frmMonarch.WndProc(System.Windows.Forms.Message@)">
+	<summary>
+ This function overrides the close function of system object.
+ </summary>
+	<param name="m">
+ parameter is "m" of type message.
+ </param>
+	<remarks>
+ This function overrides the close functionality of the system object and disables the close option on the 
+ control box.
+ </remarks>
+</member><member name="M:Monarch.frmMonarch.btnNewValidationProject_Click(System.Object,System.EventArgs)">
+	<summary>
+ This event occurs when user clicks button "NewValidationProject".
+ </summary>
+	<param name="sender">
+ parameter is "sender" of type System.Object
+ </param>
+	<param name="e">
+ parametern is "e" of type System.EventArgs
+ </param>
+	<remarks>
+ This event calls a subprocedure "NewValidationFunctionality" to perform some task.
+ </remarks>
+</member><member name="M:Monarch.frmMonarch.btnExitApplication_Click(System.Object,System.EventArgs)">
+	<summary>
+ This event occures when button "ExitApplication" is clicked.
+ </summary>
+	<param name="sender">
+ parameter is "sender" of type System.EventArgs
+ </param>
+	<param name="e">
+ Parameter is "e" of type System.EventArgs
+ </param>
+	<remarks>
+ This subprocedure stops the application.
+ </remarks>
+</member><member name="M:Monarch.frmMonarch.frmDesignValidationAutomation_Load(System.Object,System.EventArgs)">
+	<summary>
+ This event is called when form is loaded first.
+ </summary>
+	<param name="sender">
+ parameter is "sender" of type Sysytem.Object
+ </param>
+	<param name="e">
+ parameter is "e" of type System.EventArgs
+ </param>
+	<remarks>
+ This event loads images into the picture boxes when the form is loaded first and checks the license validity.
+ </remarks>
+</member><member name="T:Monarch.frmMonarch">
+	<summary>
+ This class is the primary class of the project.
+ </summary>
+	<remarks>
+ This class starts the application, this class checks for LICENSE and if the LICENSE KEY is valid then it starts 
+ the application else it prompts a error message.
+ </remarks>
+</member><member name="M:Monarch.MILFunctionalModule.GetSaveFormList(System.Windows.Forms.Button,System.Collections.ArrayList)">
+	<summary>
+	</summary>
+	<param name="oSaveButton"></param>
+	<param name="aSaveFormList"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Monarch.MILFunctionalModule.GetByteArray(System.Data.DataSet)">
+	<summary>
+ Gets the byte array data.
+ </summary>
+	<param name="oDataSet"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:Monarch.ExcelUtil">
+	<summary>
+ ExcelUtil Class is the utility class for excel operations.
+ </summary>
+	<remarks></remarks>
+</member>
+</members>
+</doc>
