@@ -1833,6 +1833,30 @@ Public Module GeneralModule
         oExcelClass.updateGUIParameters("Pins", IIf(ofrmTieRod2.optPinsYes.Checked = True, "Yes", "No"))
         oExcelClass.updateGUIParameters("Rod Clevis Pins", IIf(ofrmTieRod2.optPinsYes_Rod.Checked = True, "Yes", "No"))        '05_04_2010    RAGAVA
         '14_04_2011  RAGAVA
+
+        Try                                                                                                                    '17_09_2014 Neeraja start 
+            Dim selectedserive As String = Series
+            Select Case selectedserive
+                Case "TX (TXC)"
+                    ObjClsCostingDetails.AddCodeNumberToDataTable("232176", "DECAL TX CYL 2500 PSI")
+                Case "TL(TC)"
+                    ObjClsCostingDetails.AddCodeNumberToDataTable("232177", "DECAL LION CYL 2500 PSI")
+                Case "TH", "LN"
+                    If (strRodMaterial = "LION 1000") Then
+                        ObjClsCostingDetails.AddCodeNumberToDataTable("232990", "DECAL LION 1000 CHROME")
+                    Else
+                        ObjClsCostingDetails.AddCodeNumberToDataTable("233043", "DECAL TH3000 CYL LION")
+                    End If
+                Case "TP-High", "TP-Low"
+                    ObjClsCostingDetails.AddCodeNumberToDataTable("232178", "DECAL LION CYL 3000 PSI")
+
+                Case Else
+
+            End Select
+        Catch ex As Exception
+
+        End Try                                                                                                                '17_09_2014 Neeraja End
+
         Try
             If Trim(ofrmTieRod1.cmbClevisCapPort.Text) <> "" Then
                 Dim strClevisPortType As String = Trim(ofrmTieRod1.cmbClevisCapPort.Text).ToString. _
@@ -2564,6 +2588,24 @@ ESC_Pin_And_clips:
             'MONARCH CYLINDER CLASS 1/2-15,000/50,000 CYCLES AS PER WI04-E-11
             'TILL   HERE
             GeneralNotes = GeneralNotes & "CYLINDER CLEANLINESS CONTROLLED AS PER MONARCH WI10-E-50" & vbNewLine         '23_09_2011   RAGAVA
+
+            Dim strSealRates As String = String.Empty                                                                     '17_09_2014 Neeraja Start
+            If (ofrmTieRod2.cmbRodWiper.Text.Contains("WNUC")) Then
+                If (BoreDiameter <= 3) Then
+                    strSealRates = "-25°C(-13°F) TO +80°C(175°F)"
+                Else
+                    strSealRates = "-30°C(-20°F) TO +80°C(175°F)"
+                End If
+            ElseIf (ofrmTieRod2.cmbRodWiper.Text.Contains("DA24")) Then
+                If (BoreDiameter <= 3) Then
+                    strSealRates = "-25°C(-13°F) TO +100°C(210°F)"
+                Else
+                    strSealRates = "-30°C(-20°F) TO +100°C(210°F)"
+                End If
+            End If
+            GeneralNotes = GeneralNotes & "ALLOWABLE TEMPERATURE RANGE:" & strSealRates & vbNewLine                       '17_09_2014 Neeraja End
+
+
             If Trim(ofrmContractDetails.txtlPartCode.Text) <> "" AndAlso Trim(ofrmContractDetails.txtlPartCode.Text) <> "N/A" Then      '02_10_2009  RAGAVA
                 GeneralNotes = GeneralNotes & "CUSTOMER PART # " & Trim(ofrmContractDetails.txtlPartCode.Text)      '20_10_2009  ragava
             Else

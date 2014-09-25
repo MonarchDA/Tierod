@@ -569,3 +569,9 @@ F:\MONARCH\Monarch 2014\TieRod\September\Third Week\TieRod\Monarch\obj\Debug\Mon
 F:\MONARCH\Monarch 2014\TieRod\September\Third Week\TieRod\Monarch\obj\Debug\Monarch.Resources.resources
 F:\MONARCH\Monarch 2014\TieRod\September\Third Week\TieRod\Monarch\obj\Debug\Monarch.frmTieRod1.resources
 F:\MONARCH\Monarch 2014\TieRod\September\Third Week\TieRod\Monarch\obj\Debug\Monarch.vbproj.GenerateResource.Cache
+F:\git\TieRod\Tierod\Monarch\obj\Debug\Interop.Office.dll
+F:\git\TieRod\Tierod\Monarch\obj\Debug\Interop.Scripting.dll
+F:\git\TieRod\Tierod\Monarch\obj\Debug\Monarch.vbproj.ResolveComReference.cache
+F:\git\TieRod\Tierod\Monarch\obj\Debug\CYDAv1.2Beta.exe
+F:\git\TieRod\Tierod\Monarch\obj\Debug\CYDAv1.xml
+F:\git\TieRod\Tierod\Monarch\obj\Debug\CYDAv1.2Beta.pdb

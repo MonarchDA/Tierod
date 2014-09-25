@@ -279,9 +279,9 @@ Public Class clsCosting
             If ofrmTieRod3.ChkFluidFilmInternal.Checked = True Then
                 AddCodeNumberToDataTable("239811", "Fluid Film Internal Caps And Piston", "1", "EA", "")
             End If
-            If UCase(RodMaterialForCosting).IndexOf("LION") <> -1 Then
-                AddCodeNumberToDataTable("232990", "DECAL LION 1000 CHROME", "1", "EA", "")
-            End If
+            'If UCase(RodMaterialForCosting).IndexOf("LION") <> -1 Then                                 '17_09_2014 Neeraja Start
+            '    AddCodeNumberToDataTable("232990", "DECAL LION 1000 CHROME", "1", "EA", "")           'Neeraja commmentaed 
+            'End If                                                                                     '17_09_2014 Neeraja End
             'Till  Here
             '    If ofrmTieRod3.chkPackCylinderInPlasticBag.Checked = True Then     '16_06_2011   RAGAVA
             '        Dim strBoreDiameter As String = ofrmTieRod1.cmbBore.Text
