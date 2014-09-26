@@ -6,6 +6,11 @@
     <Value>False</Value>
   </frmContractDetails>
   <frmContractDetails>
+    <TabIndex>3</TabIndex>
+    <ConName>txtlPartCode</ConName>
+    <Value>TBA</Value>
+  </frmContractDetails>
+  <frmContractDetails>
     <TabIndex>2</TabIndex>
     <ConName>cmbAssemblyType</ConName>
     <Value>Tie Rod Cylinder Assembly</Value>
@@ -13,7 +18,7 @@
   <frmContractDetails>
     <TabIndex>2</TabIndex>
     <ConName>cmbCustomerName</ConName>
-    <Value>ABCO ENGINEERING</Value>
+    <Value>INVILOGIC</Value>
   </frmContractDetails>
   <frmTieRod1>
     <TabIndex>106</TabIndex>
@@ -23,7 +28,7 @@
   <frmTieRod1>
     <TabIndex>26</TabIndex>
     <ConName>LVNutSizeDetails</ConName>
-    <Value>1.00-2.41-N/A</Value>
+    <Value>1.00-3.57-N/A</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>28</TabIndex>
@@ -43,7 +48,7 @@
   <frmTieRod1>
     <TabIndex>37</TabIndex>
     <ConName>txtColumnLoad</ConName>
-    <Value>106592.23</Value>
+    <Value>80266.33</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>32</TabIndex>
@@ -53,7 +58,7 @@
   <frmTieRod1>
     <TabIndex>24</TabIndex>
     <ConName>cmbRodCapPort</ConName>
-    <Value>1/2 NPT</Value>
+    <Value>3/4 ORB</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>31</TabIndex>
@@ -63,17 +68,22 @@
   <frmTieRod1>
     <TabIndex>22</TabIndex>
     <ConName>cmbPortOrientationForRodCap</ConName>
-    <Value>Inline</Value>
+    <Value>90 Degrees</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>23</TabIndex>
     <ConName>cmbClevisCapPort</ConName>
-    <Value>1/2 NPT</Value>
+    <Value>3/4 ORB</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>21</TabIndex>
     <ConName>cmbPortOrientation</ConName>
-    <Value>Inline</Value>
+    <Value>90 Degrees</Value>
+  </frmTieRod1>
+  <frmTieRod1>
+    <TabIndex>6</TabIndex>
+    <ConName>txtStrokeLength</ConName>
+    <Value>10</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>10</TabIndex>
@@ -98,7 +108,7 @@
   <frmTieRod1>
     <TabIndex>4</TabIndex>
     <ConName>cmbBore</ConName>
-    <Value>3.5</Value>
+    <Value>3</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>13</TabIndex>
@@ -113,7 +123,7 @@
   <frmTieRod1>
     <TabIndex>3</TabIndex>
     <ConName>cmbStyle</ConName>
-    <Value>ASAE</Value>
+    <Value>NON ASAE</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>33</TabIndex>
@@ -123,12 +133,7 @@
   <frmTieRod1>
     <TabIndex>6</TabIndex>
     <ConName>txtRodAdder</ConName>
-    <Value>0</Value>
-  </frmTieRod1>
-  <frmTieRod1>
-    <TabIndex>5</TabIndex>
-    <ConName>cmbStrokeLength</ConName>
-    <Value>8.00</Value>
+    <Value>8</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>19</TabIndex>
@@ -143,12 +148,12 @@
   <frmTieRod1>
     <TabIndex>16</TabIndex>
     <ConName>txtExtendedLength</ConName>
-    <Value>28.25</Value>
+    <Value>38.25</Value>
   </frmTieRod1>
   <frmTieRod1>
     <TabIndex>15</TabIndex>
     <ConName>txtRetractedLength</ConName>
-    <Value>20.25</Value>
+    <Value>28.25</Value>
   </frmTieRod1>
   <frmTieRod2>
     <TabIndex>71</TabIndex>
@@ -168,7 +173,7 @@
   <frmTieRod2>
     <TabIndex>25</TabIndex>
     <ConName>cmbPaint</ConName>
-    <Value>Prime ONLY</Value>
+    <Value>Black - Low Gloss Black</Value>
   </frmTieRod2>
   <frmTieRod2>
     <TabIndex>11</TabIndex>
@@ -178,12 +183,12 @@
   <frmTieRod2>
     <TabIndex>10</TabIndex>
     <ConName>txtTieRodNutSize</ConName>
-    <Value>128271</Value>
+    <Value>128250</Value>
   </frmTieRod2>
   <frmTieRod2>
     <TabIndex>9</TabIndex>
     <ConName>txtTieRodSize</ConName>
-    <Value>  5/8 </Value>
+    <Value>  1/2 </Value>
   </frmTieRod2>
   <frmTieRod2>
     <TabIndex>12</TabIndex>
@@ -198,7 +203,7 @@
   <frmTieRod2>
     <TabIndex>19</TabIndex>
     <ConName>LVRodClevis</ConName>
-    <Value>ROD CLEVIS 1.50-1.00-59250.00-6.76047</Value>
+    <Value>ROD CLEVIS 1.50-1.00 SMALL CASTING-58140.00-5.58671</Value>
   </frmTieRod2>
   <frmTieRod2>
     <TabIndex>18</TabIndex>
@@ -213,7 +218,7 @@
   <frmTieRod2>
     <TabIndex>16</TabIndex>
     <ConName>txtClevisCap</ConName>
-    <Value>492820</Value>
+    <Value>292675</Value>
   </frmTieRod2>
   <frmTieRod2>
     <TabIndex>20</TabIndex>
@@ -223,7 +228,7 @@
   <frmTieRod2>
     <TabIndex>15</TabIndex>
     <ConName>txtRodCap</ConName>
-    <Value>494289</Value>
+    <Value>494284</Value>
   </frmTieRod2>
   <frmTieRod2>
     <TabIndex>14</TabIndex>
@@ -233,7 +238,7 @@
   <frmTieRod2>
     <TabIndex>5</TabIndex>
     <ConName>LVPinSizeDetails</ConName>
-    <Value>1.000-4.08-N/A</Value>
+    <Value>1.000-5.56-N/A</Value>
   </frmTieRod2>
   <frmTieRod2>
     <TabIndex>7</TabIndex>
@@ -268,7 +273,7 @@
   <frmTieRod2>
     <TabIndex>23</TabIndex>
     <ConName>cmbPistonSealPackage</ConName>
-    <Value>GlydP+WearRing1</Value>
+    <Value>WynSeal+WearRing1</Value>
   </frmTieRod2>
   <frmTieRod2>
     <TabIndex>35</TabIndex>
@@ -313,7 +318,7 @@
   <frmTieRod3>
     <TabIndex>72</TabIndex>
     <ConName>txtNoLabelOnCylinder</ConName>
-    <Value>6</Value>
+    <Value>5</Value>
   </frmTieRod3>
   <frmTieRod3>
     <TabIndex>73</TabIndex>
@@ -323,26 +328,21 @@
   <frmTieRod3>
     <TabIndex>70</TabIndex>
     <ConName>txtPackagePerSOP</ConName>
-    <Value>5</Value>
+    <Value>4</Value>
   </frmTieRod3>
   <frmTieRod3>
     <TabIndex>53</TabIndex>
     <ConName>txtInstallPinandClips</ConName>
-    <Value>4</Value>
+    <Value>3</Value>
   </frmTieRod3>
   <frmTieRod3>
     <TabIndex>49</TabIndex>
     <ConName>txtPaint</ConName>
-    <Value>3</Value>
+    <Value>2</Value>
   </frmTieRod3>
   <frmTieRod3>
     <TabIndex>47</TabIndex>
     <ConName>txtPrime</ConName>
-    <Value>2</Value>
-  </frmTieRod3>
-  <frmTieRod3>
-    <TabIndex>68</TabIndex>
-    <ConName>txtMaskPerBOM</ConName>
     <Value>1</Value>
   </frmTieRod3>
   <frmTieRod3>
@@ -383,7 +383,7 @@
   <frmTieRod3>
     <TabIndex>69</TabIndex>
     <ConName>chkMaskPerBOM</ConName>
-    <Value>True</Value>
+    <Value>False</Value>
   </frmTieRod3>
   <frmTieRod3>
     <TabIndex>42</TabIndex>
@@ -523,16 +523,16 @@
   <frmTieRod3>
     <TabIndex>37</TabIndex>
     <ConName>txtColumnLoad</ConName>
-    <Value>106592.23</Value>
+    <Value>80266.33</Value>
   </frmTieRod3>
   <frmTieRod3>
     <TabIndex>107</TabIndex>
     <ConName>txtCylinderDesc</ConName>
-    <Value>35THC08-150</Value>
+    <Value>30THC10-150</Value>
   </frmTieRod3>
   <frmTieRod3>
     <TabIndex>105</TabIndex>
     <ConName>txtCylinderCodeNumber</ConName>
-    <Value>672601</Value>
+    <Value>672612</Value>
   </frmTieRod3>
 </MILSaveData>

@@ -507,7 +507,7 @@ Public Class frmTieRod3
 
         If Trim(ofrmTieRod1.cmbPortOrientation.Text) = Trim(ofrmTieRod1.cmbPortOrientationForRodCap.Text) Then
             If Trim(ofrmTieRod1.cmbPortOrientation.Text).IndexOf("90") <> -1 Then
-                ChkPins.Text = "Pins Are 90 Degrees To Ports"
+                ChkPins.Text = "Pins Are 90° To Ports"
             Else
                 ChkPins.Text = "Pins Are In Line With Ports"
             End If

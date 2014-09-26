@@ -1347,7 +1347,7 @@ Partial Class frmTieRod3
         Me.txtCylinderCodeNumber.InvalidInputCharacters = ""
         Me.txtCylinderCodeNumber.IsAllowNegative = False
         Me.txtCylinderCodeNumber.LengthValue = 6
-        Me.txtCylinderCodeNumber.Location = New System.Drawing.Point(-358, 2493)
+        Me.txtCylinderCodeNumber.Location = New System.Drawing.Point(-374, 2557)
         Me.txtCylinderCodeNumber.MaximumValue = 99999.0R
         Me.txtCylinderCodeNumber.MaxLength = 32
         Me.txtCylinderCodeNumber.MinimumValue = 0.0R
@@ -1381,7 +1381,7 @@ Partial Class frmTieRod3
         Me.txtCylinderDesc.InvalidInputCharacters = ""
         Me.txtCylinderDesc.IsAllowNegative = False
         Me.txtCylinderDesc.LengthValue = 6
-        Me.txtCylinderDesc.Location = New System.Drawing.Point(-358, 2480)
+        Me.txtCylinderDesc.Location = New System.Drawing.Point(-374, 2544)
         Me.txtCylinderDesc.MaximumValue = 99999.0R
         Me.txtCylinderDesc.MaxLength = 32
         Me.txtCylinderDesc.MinimumValue = 0.0R
@@ -1397,7 +1397,7 @@ Partial Class frmTieRod3
         '
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(-467, 2483)
+        Me.Label1.Location = New System.Drawing.Point(-483, 2547)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(96, 13)
         Me.Label1.TabIndex = 106
@@ -1412,7 +1412,7 @@ Partial Class frmTieRod3
         Me.grpInfo.Controls.Add(Me.lblWorkingPressure)
         Me.grpInfo.Controls.Add(Me.lblColumnLoad)
         Me.grpInfo.Controls.Add(Me.txtColumnLoad)
-        Me.grpInfo.Location = New System.Drawing.Point(27, 768)
+        Me.grpInfo.Location = New System.Drawing.Point(11, 768)
         Me.grpInfo.Name = "grpInfo"
         Me.grpInfo.Size = New System.Drawing.Size(487, 65)
         Me.grpInfo.TabIndex = 108
