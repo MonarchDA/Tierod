@@ -86,3 +86,11 @@ F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchCalculationLayer\obj\Debu
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchCalculationLayer\obj\Debug\MonarchCalculationLayer.dll
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchCalculationLayer\obj\Debug\MonarchCalculationLayer.xml
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchCalculationLayer\obj\Debug\MonarchCalculationLayer.pdb
+F:\git\TieRod\Tierod\MonarchCalculationLayer\bin\Debug\MonarchCalculationLayer.dll
+F:\git\TieRod\Tierod\MonarchCalculationLayer\bin\Debug\MonarchCalculationLayer.pdb
+F:\git\TieRod\Tierod\MonarchCalculationLayer\bin\Debug\MonarchCalculationLayer.xml
+F:\git\TieRod\Tierod\MonarchCalculationLayer\obj\Debug\MonarchCalculationLayer.Resources.resources
+F:\git\TieRod\Tierod\MonarchCalculationLayer\obj\Debug\MonarchCalculationLayer.vbproj.GenerateResource.Cache
+F:\git\TieRod\Tierod\MonarchCalculationLayer\obj\Debug\MonarchCalculationLayer.dll
+F:\git\TieRod\Tierod\MonarchCalculationLayer\obj\Debug\MonarchCalculationLayer.xml
+F:\git\TieRod\Tierod\MonarchCalculationLayer\obj\Debug\MonarchCalculationLayer.pdb

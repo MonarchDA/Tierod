@@ -265,3 +265,27 @@ F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchFunctionalLayer\obj\Debug
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.dll
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.xml
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.pdb
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\MonarchFunctionalLayer.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\MonarchFunctionalLayer.pdb
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\MonarchFunctionalLayer.xml
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\IFLBaseDataLayer.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\IFLBusinessLayer.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\IFLCommonLayer.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\IFLCustomUILayer.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\LabelGradient.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\Microsoft.Office.Interop.Excel.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\office.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\Microsoft.Vbe.Interop.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\Microsoft.Office.Interop.Excel.xml
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\office.xml
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\Interop.Office.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\bin\Debug\Interop.VBIDE.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.vbprojResolveAssemblyReference.cache
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\obj\Debug\Interop.Office.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\obj\Debug\Interop.VBIDE.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.vbproj.ResolveComReference.cache
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.Resources.resources
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.vbproj.GenerateResource.Cache
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.dll
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.xml
+F:\git\TieRod\Tierod\MonarchFunctionalLayer\obj\Debug\MonarchFunctionalLayer.pdb

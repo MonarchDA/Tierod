@@ -402,3 +402,38 @@ F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchAPILayer\obj\Debug\Monarc
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchAPILayer\obj\Debug\MonarchAPILayer.dll
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchAPILayer\obj\Debug\MonarchAPILayer.xml
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchAPILayer\obj\Debug\MonarchAPILayer.pdb
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchAPILayer.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchAPILayer.pdb
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchAPILayer.xml
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\Microsoft.Office.Interop.Excel.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchCalculationLayer.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchDatabaseLayer.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchFunctionalLayer.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchSolidworksLayer.exe
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\IFLBaseDataLayer.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\LabelGradient.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\IFLBusinessLayer.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\Interop.SwConst.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\office.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\Microsoft.Vbe.Interop.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchCalculationLayer.pdb
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchCalculationLayer.xml
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchDatabaseLayer.pdb
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchDatabaseLayer.xml
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchFunctionalLayer.pdb
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchFunctionalLayer.xml
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchSolidworksLayer.pdb
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\MonarchSolidworksLayer.xml
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\Microsoft.Office.Interop.Excel.xml
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\office.xml
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\Interop.Office.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\bin\Debug\Interop.VBIDE.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\obj\Debug\MonarchAPILayer.vbprojResolveAssemblyReference.cache
+F:\git\TieRod\Tierod\MonarchAPILayer\obj\Debug\Interop.Office.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\obj\Debug\Interop.VBIDE.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\obj\Debug\MonarchAPILayer.vbproj.ResolveComReference.cache
+F:\git\TieRod\Tierod\MonarchAPILayer\obj\Debug\MonarchAPILayer.Resources.resources
+F:\git\TieRod\Tierod\MonarchAPILayer\obj\Debug\MonarchAPILayer.vbproj.GenerateResource.Cache
+F:\git\TieRod\Tierod\MonarchAPILayer\obj\Debug\MonarchAPILayer.dll
+F:\git\TieRod\Tierod\MonarchAPILayer\obj\Debug\MonarchAPILayer.xml
+F:\git\TieRod\Tierod\MonarchAPILayer\obj\Debug\MonarchAPILayer.pdb

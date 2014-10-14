@@ -6,50 +6,13 @@ CYDAv1.2Beta
 </name>
 </assembly>
 <members>
-<member name="P:Monarch.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:Monarch.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:Monarch.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member><member name="M:Monarch.MILFunctionalModule.GetSaveFormList(System.Windows.Forms.Button,System.Collections.ArrayList)">
-	<summary>
-	</summary>
-	<param name="oSaveButton"></param>
-	<param name="aSaveFormList"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:Monarch.MILFunctionalModule.GetByteArray(System.Data.DataSet)">
-	<summary>
- Gets the byte array data.
- </summary>
-	<param name="oDataSet"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:Monarch.clsimgcapture.CaptureScreen">
+<member name="M:Monarch.clsimgcapture.CaptureScreen">
 	<summary>
 	</summary>
 	<remarks></remarks>
 </member><member name="T:Monarch.clsimgcapture">
 	<summary>
 	</summary>
-	<remarks></remarks>
-</member><member name="T:Monarch.ExcelUtil">
-	<summary>
- ExcelUtil Class is the utility class for excel operations.
- </summary>
-	<remarks></remarks>
-</member><member name="T:Monarch.ReadExcel">
-	<summary>
- Reads the HookUP information from the given Excel
- </summary>
 	<remarks></remarks>
 </member><member name="M:Monarch.frmMonarch.WndProc(System.Windows.Forms.Message@)">
 	<summary>
@@ -109,6 +72,43 @@ CYDAv1.2Beta
  This class starts the application, this class checks for LICENSE and if the LICENSE KEY is valid then it starts 
  the application else it prompts a error message.
  </remarks>
+</member><member name="P:Monarch.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Monarch.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Monarch.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:Monarch.MILFunctionalModule.GetSaveFormList(System.Windows.Forms.Button,System.Collections.ArrayList)">
+	<summary>
+	</summary>
+	<param name="oSaveButton"></param>
+	<param name="aSaveFormList"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Monarch.MILFunctionalModule.GetByteArray(System.Data.DataSet)">
+	<summary>
+ Gets the byte array data.
+ </summary>
+	<param name="oDataSet"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:Monarch.ExcelUtil">
+	<summary>
+ ExcelUtil Class is the utility class for excel operations.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Monarch.ReadExcel">
+	<summary>
+ Reads the HookUP information from the given Excel
+ </summary>
+	<remarks></remarks>
 </member>
 </members>
 </doc>

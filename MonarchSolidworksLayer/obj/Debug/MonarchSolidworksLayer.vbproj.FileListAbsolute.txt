@@ -91,3 +91,12 @@ F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchSolidworksLayer\obj\Debug
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchSolidworksLayer\obj\Debug\MonarchSolidworksLayer.exe
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchSolidworksLayer\obj\Debug\MonarchSolidworksLayer.xml
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchSolidworksLayer\obj\Debug\MonarchSolidworksLayer.pdb
+F:\git\TieRod\Tierod\MonarchSolidworksLayer\bin\Debug\MonarchSolidworksLayer.exe
+F:\git\TieRod\Tierod\MonarchSolidworksLayer\bin\Debug\MonarchSolidworksLayer.pdb
+F:\git\TieRod\Tierod\MonarchSolidworksLayer\bin\Debug\MonarchSolidworksLayer.xml
+F:\git\TieRod\Tierod\MonarchSolidworksLayer\obj\Debug\MonarchSolidworksLayer.vbprojResolveAssemblyReference.cache
+F:\git\TieRod\Tierod\MonarchSolidworksLayer\obj\Debug\MonarchSolidworksLayer.Resources.resources
+F:\git\TieRod\Tierod\MonarchSolidworksLayer\obj\Debug\MonarchSolidworksLayer.vbproj.GenerateResource.Cache
+F:\git\TieRod\Tierod\MonarchSolidworksLayer\obj\Debug\MonarchSolidworksLayer.exe
+F:\git\TieRod\Tierod\MonarchSolidworksLayer\obj\Debug\MonarchSolidworksLayer.xml
+F:\git\TieRod\Tierod\MonarchSolidworksLayer\obj\Debug\MonarchSolidworksLayer.pdb

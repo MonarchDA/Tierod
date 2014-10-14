@@ -223,3 +223,23 @@ F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchDatabaseLayer\obj\Debug\M
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchDatabaseLayer\obj\Debug\MonarchDatabaseLayer.dll
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchDatabaseLayer\obj\Debug\MonarchDatabaseLayer.xml
 F:\MONARCH\Monarch 2014\TieRod\September\TieRod\MonarchDatabaseLayer\obj\Debug\MonarchDatabaseLayer.pdb
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\MonarchDatabaseLayer.dll
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\MonarchDatabaseLayer.pdb
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\MonarchDatabaseLayer.xml
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\IFLBaseDataLayer.dll
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\IFLBusinessLayer.dll
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\MonarchFunctionalLayer.dll
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\Microsoft.Office.Interop.Excel.dll
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\LabelGradient.dll
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\office.dll
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\Microsoft.Vbe.Interop.dll
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\MonarchFunctionalLayer.pdb
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\MonarchFunctionalLayer.xml
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\Microsoft.Office.Interop.Excel.xml
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\bin\Debug\office.xml
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\obj\Debug\MonarchDatabaseLayer.vbprojResolveAssemblyReference.cache
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\obj\Debug\MonarchDatabaseLayer.Resources.resources
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\obj\Debug\MonarchDatabaseLayer.vbproj.GenerateResource.Cache
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\obj\Debug\MonarchDatabaseLayer.dll
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\obj\Debug\MonarchDatabaseLayer.xml
+F:\git\TieRod\Tierod\MonarchDatabaseLayer\obj\Debug\MonarchDatabaseLayer.pdb

@@ -2603,8 +2603,9 @@ ESC_Pin_And_clips:
                     strSealRates = "-30°C(-20°F) TO +100°C(210°F)"
                 End If
             End If
-            GeneralNotes = GeneralNotes & "ALLOWABLE TEMPERATURE RANGE:" & strSealRates & vbNewLine                       '17_09_2014 Neeraja End
-
+            If (Not (String.IsNullOrEmpty(strSealRates))) Then
+                GeneralNotes = GeneralNotes & "ALLOWABLE TEMPERATURE RANGE:" & strSealRates & vbNewLine
+            End If                                                                                                       '17_09_2014 Neeraja End
 
             If Trim(ofrmContractDetails.txtlPartCode.Text) <> "" AndAlso Trim(ofrmContractDetails.txtlPartCode.Text) <> "N/A" Then      '02_10_2009  RAGAVA
                 GeneralNotes = GeneralNotes & "CUSTOMER PART # " & Trim(ofrmContractDetails.txtlPartCode.Text)      '20_10_2009  ragava

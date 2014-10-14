@@ -94,27 +94,6 @@ MonarchFunctionalLayer
  This enum is to describe the items in the arraylist UserInputsMinMaxImages
  </summary>
 	<remarks></remarks>
-</member><member name="M:MonarchFunctionalLayer.clsimgcapture.CaptureScreen">
-	<summary>
-	</summary>
-	<remarks></remarks>
-</member><member name="T:MonarchFunctionalLayer.clsimgcapture">
-	<summary>
-	</summary>
-	<remarks></remarks>
-</member><member name="P:MonarchFunctionalLayer.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:MonarchFunctionalLayer.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:MonarchFunctionalLayer.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
 </member><member name="F:MonarchFunctionalLayer.IFLGetSetUI.IFLGetSetUIClass._oTable">
  -----------------------------------------------------------------------------
  <summary>
@@ -389,6 +368,27 @@ MonarchFunctionalLayer
  </history>
  -----------------------------------------------------------------------------
 
+</member><member name="P:MonarchFunctionalLayer.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:MonarchFunctionalLayer.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:MonarchFunctionalLayer.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:MonarchFunctionalLayer.clsimgcapture.CaptureScreen">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="T:MonarchFunctionalLayer.clsimgcapture">
+	<summary>
+	</summary>
+	<remarks></remarks>
 </member>
 </members>
 </doc>
